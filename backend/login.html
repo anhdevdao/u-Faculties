@@ -35,9 +35,9 @@
                 border: none;
             }
             .input-topbar {
-                display: inline-block; 
+                display: inline-block;
                 margin-right: 10px;
-                top: 2%;  
+                top: 2%;
             }
             #username-login {
                 position: relative;
@@ -83,7 +83,6 @@
                 position: absolute;
                 background-image: url("public\images\search.png");
             }
-
             .option {
                 border: 1px solid gray;
                 margin-right: 10px;
@@ -99,11 +98,11 @@
                 <a href="localhost:8000" id="logo-page">
                     <span id="header-logo"></span>
                 </a>
-                <div>                 
+                <div>
                     <div style="display: inline-block; width: 600px;"></div>
                 </div>
                 <div id="header-user">
-                    <form action="/controller/register-controller" method="post">
+                    <form action="/controllers/authenticateController" method="post">
                         <span class="input-topbar input" id="username-login">
                             <div class="login-input-lable" style="right: 100px;">Email</div>
                             <input type="text" name="email">
@@ -114,7 +113,7 @@
                             <a id="forgot-password" href="">Quên mật khẩu?</a>
                         </span>
                         <span class="input-topbar input" id="login-button">
-                            <input type="submit" value="Đăng nhập">
+                            <input type="submit" value="Submit">
                         </span>
                     </form>
                 </div>
@@ -149,7 +148,7 @@
                             </a>
                         </span>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </body>
