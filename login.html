@@ -1,60 +1,100 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Đơn vị</title>
+        <title>Lĩnh vực nghiên cứu</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="./public/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="./public/css/tmp.css">
+        <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="public/css/tmp.css">
     </head>
     <body>
         <div id="surface">
             <div class="container">
                 <div>
-                    <span style="display: inline-block;">
-                        <h1>Đơn vị</h1>
-                    </span>
-                    <a href="" id="create">Thêm mới</a>
-                </div>
-                <br>
-                <div id="unit-option">
-                    <label for="unit-list" class="label">Loại Đơn Vị </label>
-                    <select value="unit-list">
-                        <option>Bộ môn</option>
-                        <option>Phòng thí nghiệm</option>
-                    </select>
+                    <h1>Lĩnh vực nghiên cứu</h1>
                 </div>
                 <br>
                 <br>
-                <br>
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>TT</th>
-                                <th>Tên đơn vị</th>
-                                <th>Loại đơn vị</th>
-                                <th>Địa chỉ</th>
-                                <th>Điện thoại</th>
-                                <th>Website</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% units.forEach((unit, index) => { %>
-                                <tr>   
-                                    <th><%= index + 1 %></th>
-                                    <th><%= unit.name %></th>
-                                    <th><%= unit.unit_type %></th>
-                                    <th><%= unit.address %></th>
-                                    <th><%= unit.phone %></th>
-                                    <th><%= unit.website%></th>
-                                    <th><%= unit.interactive %></th>
-                                </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
+                <div id="field-list">
+                    <div style="margin-top: 20px;">
+                        <div id="field-list-name" style="display: inline-block">
+                            <h3 style="margin: 0;">Lĩnh vực</h3>
+                        </div>
+                        <button type="button" class="btn btn-primary">Thêm</button>
+                    </div>
+                    <ul class="tree">
+                        <li class="has-children">
+                            <img src="public/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                            <a href="">ACM Computing Classification System</a>
+                            <ul>
+                                <li class="has-children">
+                                    <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                    <a href="">General and refernce</a>
+                                </li>
+                                <li class="has-children">
+                                    <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                    <a href="">Hardware</a>
+                                </li>
+                                <li class="has-children">
+                                    <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                    <a href="">Computer systems organization</a>
+                                </li>
+                                <li class="has-children">
+                                    <img src="public/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                    <a href="">Networks</a>
+                                    <button type="button" class="btn btn-primary">Thêm</button>
+                                    <button type="button" class="btn btn-primary">Sửa</button>
+                                    <button type="button" class="btn btn-primary">Xóa</button>
+                                    <ul>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                            <a href="">Network architectures</a>
+                                        </li>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                            <a href="">Network protocols</a>
+                                        </li>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif"/>
+                                            <a href="">Network components</a>
+                                        </li>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif"/>
+                                            <a href="">Network algorithms</a>
+                                        </li>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif"/>
+                                            <a href="">Network performance evaluation</a>
+                                        </li>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif"/>
+                                            <a href="">Network properties</a>
+                                        </li>
+                                        <li class="has-children">
+                                            <img src="public/image/plus.gif"/>
+                                            <a href="">Network services</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <img src="public/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                    <a href="">Software and its engineering</a>
+                                    <ul>
+                                            <li class="has-children">
+                                                <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                                <a href="">Test1</a>
+                                            </li>
+                                            <li class="has-children">
+                                                <img src="public/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
+                                                <a href="">Test2</a>
+                                            </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="public/js/tree.js"></script>
     </body>
 </html>

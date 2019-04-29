@@ -3,79 +3,20 @@
     <head>
         <title>Cán bộ</title>
         <meta charset="utf-8">
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            a { 
-                text-decoration: none;
-            }
-            #content {
-                padding: 0 30px;
-            }
-            #create {
-                background-color: cyan;
-                position: fixed;
-                border: 1px solid gray;
-                margin-top: 30px;
-                padding: 5px;
-                cursor: pointer;
-                right: 180px;
-            }
-            #create-from-excel {
-                background-color: cyan;
-                position: fixed;
-                border: 1px solid gray;
-                margin-top: 30px;
-                padding: 5px;
-                cursor: pointer;
-                right: 61px;
-            }
-            .employee-option {
-                display: inline;
-                margin-right: 30px;
-
-            }
-            label {
-                font-weight: bold; 
-            }
-            #tb {
-                border-right: none;
-                border-left: none;
-            }
-            th {
-                border-bottom: 1px solid grey;
-                text-align: left;
-                padding-top: 7px; 
-                padding-bottom: 7px;
-            }
-            thead tr th {
-                border-bottom: 2px solid grey;
-            }
-            thead tr th {
-                font-weight: bold;
-            }
-            tbody tr th {
-                font-weight: normal;
-            }
-            .action-option {
-                background-color: cyan;
-                border: 1px solid gray;
-                padding: 2px;
-                cursor: pointer;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <div id="surface">
-            <div id="content">
+            <div class="container">
                 <div>
                     <span style="display: inline-block;">
                         <h1>Cán bộ</h1>
                     </span>
-                    <a href="" id="create">Thêm mới</a>
-                    <a href="" id="create-from-excel">Thêm từ Excel</a>
+                    <div class="create-object">
+                        <button type="button" class="btn">Thêm mới</button>
+                        <button type="button" class="btn">Thêm từ Excel</button>
+                    </div>
                 </div>
                 <br>
                 <div style="float: right;">
@@ -106,66 +47,38 @@
                 <br>
                 <br>
                 <br>
-                <div>
-                    <table id="tb">
-                        <col width="50">
-                        <col width="100">
-                        <col width="200">
-                        <col width="100">
-                        <col width="250">
-                        <col width="120">
-                        <col width="80">
-                        <col width="300">
-                        <col width="70">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="order">TT</th>
-                                <th class="emp-id">Mã CB</th>
-                                <th class="emp-name">Họ và tên</th>
-                                <th class="account">Tài khoản</th>
-                                <th class="email">VNU email</th>
-                                <th class="emp-type">Loại CB</th>
-                                <th class="degree">Học vị</th>
-                                <th class="work-addr">Đơn vị công tác</th>
-                                <th class="action">Thao tác</th>
+                                <th>TT</th>
+                                <th>Mã CB</th>
+                                <th>Họ và tên</th>
+                                <th>Tài khoản</th>
+                                <th>VNU email</th>
+                                <th>Loại CB</th>
+                                <th>Học vị</th>
+                                <th>Đơn vị công tác</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th class="order">1</th>
-                                <th class="emp-id">21565686</th>
-                                <th class="emp-name">Hồ Văn Canh</th>
-                                <th class="account">canhhvbca</th>
-                                <th class="email">canhhbbca@vnu.edu.vn</th>
-                                <th class="emp-type">Giảng viên</th>
-                                <th class="degree">TS</th>
-                                <th class="work-addr">Bộ Công an</th>
-                                <th class="action">
-                                    <div>
-                                            <a href="" class="action-option" id="edit">Sửa</a>
-                                            <a href="" class="action-option" id="del">Xóa</a>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="order">2</th>
-                                <th class="emp-id">12345678</th>
-                                <th class="emp-name">Trần Trúc Mai</th>
-                                <th class="account">maitrant</th>
-                                <th class="email">maitrant@vnu.edu.vn</th>
-                                <th class="emp-type">Giảng viên</th>
-                                <th class="degree">TS</th>
-                                <th class="work-addr">Bộ môn Mạng máy tính</th>
-                                <th class="action">
-                                    <div>
-                                        <a href="" class="action-option" id="edit">Sửa</a>
-                                        <a href="" class="action-option" id="del">Xóa</a>
-                                    </div>
-                                </th>
-                            </tr>             
+                            <% employee.forEach((empl, index) => { %>
+                                <tr>   
+                                    <th><%= index + 1 %></th>
+                                    <th><%= empl.employeeId %></th>
+                                    <th><%= empl.name %></th>
+                                    <th><%= empl.username %></th>
+                                    <th><%= empl.email %></th>
+                                    <th><%= empl.employeeType%></th>
+                                    <th><%= empl.degree %></th>
+                                    <th><%= empl.company %></th>
+                                    <th><%= empl.interactive %></th>
+                                </tr>
+                            <% }); %>
                         </tbody>
                     </table>
-                </div>
+                </div>                
             </div>
         </div>
     </body>

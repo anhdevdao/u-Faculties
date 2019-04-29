@@ -36,12 +36,22 @@ function renderHTML(path, res, data) {
   res.end(htmlRenderized);
 }
 
-app.get("/unit", function(req, res) {
-  connection.query("SELECT * FROM units", function (err, result, fields) {
+app.get('/unit', function(req, res) {
+  connection.query('SELECT * FROM units', function (err, result, fields) {
     if (err) throw err;
     renderHTML('./views/unit.ejs', res, {units: result});
   });
 })
+
+app.get('/employee', function(req, res) {
+  connection.query('SELECT * FROM employee', function (err, result, fields) {
+    if (err) throw err;
+    renderHTML('./views/employee.ejs', res, {employee: result});
+  });
+})
+
+// var route = require('./routes/index');
+// app.get('/unit', route.unitRender);
 
 // route to handle login and registration
 app.post('/api/register', registerController.register);

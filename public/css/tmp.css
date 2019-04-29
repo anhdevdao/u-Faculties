@@ -1,53 +1,41 @@
-a {
+a, a:hover {
     text-decoration: none;
 }
-input {
-    border-radius: 3px;
-    border: none;
+body {
+    margin: 0;
+    padding: 0;
 }
-.container {
-    max-width: 1140px;
-    margin: auto;   
+ul, li {
+    list-style: none;
 }
-.clear-fix:after {
-    display: block;
-    content: "";
-    clear: both;
+#content {
+    padding: 0 30px;
 }
-#header {
-    max-width: 100%;
-    background-color:rgb(71, 141, 50);
-}
-#header-user {
-    float: right;
-}
-.input-topbar {
-    display: inline-block;
-    margin-right: 10px;
-}
-.input-box {
-    padding-left: 5px;
-}
-#forgot-password {
-    display: block;
-}
-#slogan {
-    text-align: center;
-    font-family: 
-}
-#search-bar {
-    min-width: 300px;
-    font-size: 17px;
-    width: 50%;
-    height: 30px;
-    background-color: rgb(158, 219, 97);
-    position: relative;
-    left: 25%;
-    z-index: 1;
+#field-list {
+    padding: 0 20px;
+    border: 1px solid grey;
 }
 #create {
-    float: right;
+    background-color: cyan;
+    position: fixed;
+    border: 1px solid gray;
+    padding: 1px;
+    cursor: pointer;
+    margin-left: 20px;
 }
-#unit-option {
-    float: right;
+#edit {
+    background-color: cyan;
+    position: fixed;
+    border: 1px solid gray;
+    padding: 1px;
+    cursor: pointer;
+    margin-left: 70px;
+}
+#del {
+    background-color: cyan;
+    position: fixed;
+    border: 1px solid gray;
+    padding: 1px;
+    cursor: pointer;
+    margin-left: 107px;
 }
