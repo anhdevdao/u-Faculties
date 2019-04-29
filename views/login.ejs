@@ -15,36 +15,45 @@
                     </a>
                     <div id="header-user">
                         <form action="/controllers/authenticateController" method="post">
-                            <span class="input-topbar" id="username-login">
-                                <div class="login-input-lable">Email</div>
-                                <input class="input-box" type="text" name="email" required>
-                            </span>
-                            <span class="input-topbar">
-                                <div class="login-input-lable">Mật khẩu</div>
-                                <input class="input-box" type="password" name="password" required>
-                                <a id="forgot-password" href="">Quên mật khẩu?</a>
-                            </span>
-                            <span class="input-topbar" id="login-button">
-                                <input type="submit" value="Submit">
-                            </span>
+                            <table id=login>
+                                <tbody>
+                                    <tr>
+                                        <th>Tên đăng nhập</th>
+                                        <th>Mật khẩu</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <input class="input-box" type="text" name="username" required>
+                                        </th>
+                                        <th>
+                                            <input class="input-box" type="password" name="password" required>
+                                        </th>
+                                        <th>
+                                            <button type="submit" class="btn btn-success" id="login-btn">Đăng nhập</button>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <a id="forgot-password" href="">Quên mật khẩu?</a>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </form>
                     </div>
                 </div>
             </div>
-            <div id="content" class="container clear-fix">
+            <div class="container clear-fix">
                 <ul id="main-content">
                     <br>
                     <div>
                         <h1 id="slogan">Trang thông tin giảng viên</h1>
                     </div>
                     <br>
-                    <div>
-                        <input class="input-box" id="search-bar" type="text" placeholder="Bạn muốn tìm gì?...">
-                        <span class="search-btn">
-                            <a href="" id="main-search-bar-btn" class="search-btn">
-                                <img src="./public\images\search.png">
-                            </a>
-                        </span> 
+                    <div class="form-group has-search">
+                        <input type="text" class="form-control" placeholder="Bạn muốn tìm kiếm gì?...">
                     </div>
                     <br>
                     <br>

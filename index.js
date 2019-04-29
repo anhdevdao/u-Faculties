@@ -50,6 +50,9 @@ app.get('/employee', function(req, res) {
   });
 })
 
+app.get("/field_research", function(req, res) {
+  res.render("field_research");
+})
 // var route = require('./routes/index');
 // app.get('/unit', route.unitRender);
 

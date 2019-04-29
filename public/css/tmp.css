@@ -11,10 +11,10 @@ ul, li {
 #content {
     padding: 0 30px;
 }
-#field-list {
-    padding: 0 20px;
-    border: 1px solid grey;
-}
+    #field-list {
+        padding: 0 20px;
+        border: 1px solid grey;
+    }
 #create {
     background-color: cyan;
     position: fixed;

@@ -5,6 +5,9 @@ input {
     border-radius: 3px;
     border: none;
 }
+ul, li {
+    list-style: none;
+}
 .container {
     max-width: 1140px;
     margin: auto;   
@@ -21,6 +24,10 @@ input {
 #header-user {
     float: right;
 }
+table#login tbody tr th {
+    font-weight: normal;
+    padding-right: 10px;
+}
 .input-topbar {
     display: inline-block;
     margin-right: 10px;
@@ -30,6 +37,9 @@ input {
 }
 #forgot-password {
     display: block;
+}
+#login-btn {
+    padding: 0 3px;
 }
 #slogan {
     text-align: center;
@@ -62,4 +72,8 @@ label {
     width: 300px;
     height: 200px;
     margin-bottom: 10px;
+}
+#field-list {
+    padding: 0 20px;
+    border: 1px solid grey;
 }
