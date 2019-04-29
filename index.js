@@ -22,8 +22,16 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+app.get("/signup", function(req, res) {
+  res.render("signup");
+})
+
 app.get("/", function(req, res) {
   res.render("login");
+})
+
+app.get('/index', function(req, res) {
+  res.render("index");
 })
 
 function renderHTML(path, res, data) {
@@ -53,12 +61,11 @@ app.get('/employee', function(req, res) {
 app.get("/field_research", function(req, res) {
   res.render("field_research");
 })
+
 // var route = require('./routes/index');
 // app.get('/unit', route.unitRender);
 
 // route to handle login and registration
-app.post('/api/register', registerController.register);
-app.post('/api/authenticate', authenticateController.authenticate);
 
 console.log(authenticateController);
 
