@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+// Config session
 
 // Config ejs engine
 app.set("view engine", "ejs");
