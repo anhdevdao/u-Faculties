@@ -2,39 +2,44 @@ var http = require("http");
 var fs = require("fs");
 var ejs = require("ejs");
 var express = require("express");
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy
+var session = require('express-session');
 var bodyParser = require("body-parser");
 var { parse } = require("querystring");
 
 var connection = require("./config");
 var app = express();
+var router = express.Router();
 
 app.use(express.static(__dirname + '/public'));
 //tạo authenticate cho 2 biến đăng ký và đăng nhập
 var authenticateController = require("./controllers/authenticate-controller");
 var registerController = require("./controllers/register-controller");
+const mainRoute = require('./routes/router');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
 
+// app.use(passport.initialize());
 // Config session
+app.use(session({
+  secret: 'something',
+  cookie: {
+    maxAge: 60000
+  }
+}));
+// app.use(passport.session());
 
 // Config ejs engine
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-app.get("/signup", function(req, res) {
-  res.render("signup");
-})
+// Routing
+app.use('/', mainRoute);
 
-app.get("/", function(req, res) {
-  res.render("login");
-})
 
-app.get('/index', function(req, res) {
-  res.render("index");
-})
-
+// Render with mysql
 function renderHTML(path, res, data) {
   var htmlContent = fs.readFileSync(path, 'utf-8');
   data.filename = path;
@@ -59,20 +64,9 @@ app.get('/employee', function(req, res) {
   });
 })
 
-app.get("/field_research", function(req, res) {
-  res.render("field_research");
-})
-
-// var route = require('./routes/index');
-// app.get('/unit', route.unitRender);
-
 // route to handle login and registration
 
 console.log(authenticateController);
-
-app.post('/controllers/register-controller', registerController.register);
-app.post('/controllers/authenticateController', authenticateController.authenticate);
-
 
 
 //listen port
