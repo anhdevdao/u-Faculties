@@ -1,6 +1,6 @@
-var express = require("express");
-var bcrypt = require('bcrypt');
-var connection = require('./../config');
+const express = require("express");
+const bcrypt = require('bcrypt');
+const connection = require('./../config');
 
 //tạo module đăng ký với các parameters
 module.exports.register = function(req, res) {

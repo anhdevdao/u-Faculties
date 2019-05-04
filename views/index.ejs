@@ -19,9 +19,11 @@
                                 <tr>
                                 </tr>
                                 <tr>
-                                    <th>Xin chào, </th>
+                                    <th>Xin chào, <%= name %></th>
                                     <th>
-                                        <a id="logout" href="localhost:8012" method="GET" action="/">Đăng xuất</a>
+                                        <form action="/" method="POST">
+                                            <input type="submit" value="Đăng xuất">
+                                        </form>
                                     </th>
                                 </tr>
                                 <tr>
