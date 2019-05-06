@@ -14,14 +14,47 @@
                     <span style="display: inline-block;">
                         <h1>Đơn vị</h1>
                     </span>
-                    <button type="button" class="btn btn-primary create-object">Thêm mới</button>
+                    <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary create-object">Thêm mới</button>
+                    <div id="modal-wrapper" class="modal">
+  
+                        <div class="modal-content animate">
+                          <div>
+                            <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                            <br>
+                            <h1 style="text-align:center">Thêm Đơn vị</h1>
+                            <br>
+                          </div>
+                      
+                          <div class="sub-container">
+                            <form action='/controllers/units-controller' method='POST'>
+                                <label class="create-label" for="name">Tên đơn vị: </label>
+                                <input id="name" class="input-box" name="unitName" required/>
+                                <br>
+                                <label class="create-label" for="type">Loại đơn vị: </label>
+                                <input id="type" class="input-box" name="unitType" required/>
+                                <br>
+                                <label class="create-label" for="addr">Địa chỉ: </label>
+                                <input id="addr" class="input-box" name="address"/>
+                                <br>
+                                <label class="create-label" for="tel">Điện thoại: </label>
+                                <input id="tel" class="input-box" name="phone"/>
+                                <br>
+                                <label class="create-label" for="web">Website: </label>
+                                <input id="web" class="input-box" name="website"/>
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
+                            </form>
+                          </div>
+                        </form> 
+                    </div>
                 </div>
                 <br>
                 <div style="float: right;">
-                    <label for="unit-list" class="label">Loại Đơn Vị </label>
-                    <select value="unit-list">
-                        <option>Bộ môn</option>
-                        <option>Phòng thí nghiệm</option>
+                    <label for="unit-list" class="label">Loại Đơn Vị: </label>
+                    <select value="unit-list" id="myInput">
+                        <option value="Bộ môn">Bộ môn</option>
+                        <option value="Phòng thí nghiệm">Phòng thí nghiệm</option>
                     </select>
                 </div>
                 <br>
@@ -40,7 +73,7 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTable">
                             <% units.forEach((unit, index) => { %>
                                 <tr>   
                                     <th><%= index + 1 %></th>
@@ -49,7 +82,12 @@
                                     <th><%= unit.address %></th>
                                     <th><%= unit.phone %></th>
                                     <th><%= unit.website%></th>
-                                    <th><%= unit.interactive %></th>
+                                    <th>
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary table-edit">Sửa</button>
+                                            <button class="btn btn-secondary table-edit">Xóa</button>
+                                        </div>
+                                    </th>
                                 </tr>
                             <% }); %>
                         </tbody>
@@ -57,5 +95,7 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/js/myjs.js"></script>
     </body>
 </html>

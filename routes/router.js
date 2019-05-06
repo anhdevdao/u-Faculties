@@ -5,11 +5,13 @@ const fs = require("fs");
 const connection = require("../config");
 
 const authenticateController = require('../controllers/authenticate-controller'),
-    registerController = require('../controllers/register-controller');
+    registerController = require('../controllers/register-controller'),
+    unitController = require('../controllers/units-controller'),
+    employeeController = require('../controllers/employee-controller');
 
 
-router.route('/controllers/authenticateController')
-.post(authenticateController.authenticate);
+// router.route('/controllers/authenticateController')
+// .post(authenticateController.userLogin);
 
 
 router.route('/controllers/register-controller')
@@ -23,12 +25,16 @@ router.route('/')
 .post((req, res) => res.render('login'))
 
 router.route('/index')
-.get((req, res) => res.render("index", {
-  name: req.name
-})) 
+.get((req, res) => res.render("index")) 
 
 router.route('/field_research')
-.get((req, res) => res.render("field_research"))
+.get((req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("field_research")
+  } else {
+    res.send('Chua login')
+  }
+})
 
 // Render with HTML
 function renderHTML(path, res, data) {
@@ -49,11 +55,17 @@ router.route('/unit')
     });
 })
 
+router.route('/controllers/units-controller')
+.post(unitController.addUnit);
+
+router.route('/controllers/employee-controller')
+.post(employeeController.addEmployee);
+
 router.route('/employee')
 .get(function(req, res) {
-    connection.query('SELECT * FROM employee', function (err, result, fields) {
+  connection.query('SELECT * FROM employee', function (err, result, fields) {
       if (err) throw err;
       renderHTML('./views/employee.ejs', res, {employee: result});
-    });
+  });
 })
 module.exports = router;

@@ -15,10 +15,46 @@
                         <h1>Cán bộ</h1>
                     </span>
                     <div class="create-object">
-                        <button type="button" class="btn btn-primary">Thêm mới</button>
+                        <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary">Thêm mới</button>
+                        <div id="modal-wrapper" class="modal">
+                            <div class="modal-content animate">      
+                                <div>
+                                    <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                    <br>
+                                    <h1 style="text-align:center">Thêm Giảng viên</h1>
+                                    <br>
+                                </div>
+                                <div class="sub-container">
+                                    <form action='/controllers/employee-controller' method='POST'>
+                                        <label class="create-label" for="id">Mã cán bộ: </label>
+                                        <input id="id" class="input-box" name="employeeId" required/>
+                                        <br>
+                                        <label class="create-label" for="name">Họ và tên: </label>
+                                        <input id="name" class="input-box" name="name" required/>
+                                        <br>
+                                        <label class="create-label" for="acc">Tài khoản: </label>
+                                        <input id="acc" class="input-box" name="username" required/>
+                                        <br>
+                                        <label class="create-label" for="mail">VNU Email: </label>
+                                        <input id="mail" class="input-box" name="email"/>
+                                        <br>
+                                        <label class="create-label" for="type">Loại CB: </label>
+                                        <input id="type" class="input-box" name="employeeType" required/>
+                                        <br>
+                                        <label class="create-label" for="deg">Học vị: </label>
+                                        <input id="deg" class="input-box" name="degree"/>
+                                        <br>
+                                        <label class="create-label" for="unit">Nơi công tác: </label>
+                                        <input id="unit" class="input-box" name="company" required/>
+                                        <br>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary">Thêm</button>
+                                    </form>
+                                </div> 
+                            </div>
+                        </div>
                         <button type="button" class="btn btn-primary">Thêm từ Excel</button>
                     </div>
-                </div>
                 <br>
                 <div style="float: right;">
                     <div class="employee-option" id="employee-select">
@@ -74,7 +110,12 @@
                                     <th><%= empl.employeeType%></th>
                                     <th><%= empl.degree %></th>
                                     <th><%= empl.company %></th>
-                                    <th><%= empl.interactive %></th>
+                                    <th>
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary table-edit">Sửa</button>
+                                            <button class="btn btn-secondary table-edit">Xóa</button>
+                                        </div>
+                                    </th>
                                 </tr>
                             <% }); %>
                         </tbody>
@@ -82,5 +123,6 @@
                 </div>                
             </div>
         </div>
+        <script type="text/javascript" src="/js/myjs.js"></script>
     </body>
 </html>

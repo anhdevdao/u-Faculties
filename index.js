@@ -1,11 +1,11 @@
-const fs = require("fs");
 const ejs = require("ejs");
 const express = require("express");
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy
+const localStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const bodyParser = require("body-parser");
 const { parse } = require("querystring");
+const bcrypt = require('bcrypt');
 
 const connection = require("./config");
 const app = express();
@@ -33,6 +33,36 @@ app.set("views", "./views");
 
 // Routing
 app.use('/', mainRoute);
+
+app.route('/controllers/authenticateController')
+.post(passport.authenticate('local', {
+  successRedirect: '/index',
+  failureRedirect: '/'
+}))
+
+passport.use(new localStrategy((username, password, done) => {
+  connection.query('SELECT * FROM account WHERE username = ?', username, function(err, results) {
+    if (results) {
+      bcrypt.compare(password, results[0].password, function(err, check) {
+        if (check) {
+          return done(null, results);
+        } else {
+          return done(null, false, {message: "Username and password doesn't match"});
+        }
+      })
+    } else {
+       return done(null, false, {message: "User doesn't exist"});
+    }
+  })
+}))
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 
 //listen port
