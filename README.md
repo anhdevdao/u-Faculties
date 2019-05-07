@@ -5,7 +5,9 @@ Website giúp sinh viên và giảng viên có thể  tìm hiểu cũng như the
 - Cài đặt *node js* và *npm*
 - Clone repo này về  máy
 - Chạy lệnh:
-    - npm run dev
+    ```
+    npm run dev
+    ```
 
 ## Nhóm tác giả
 - Đào Tuấn Anh
