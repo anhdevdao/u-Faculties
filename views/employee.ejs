@@ -59,14 +59,13 @@
                 <div style="float: right;">
                     <div class="employee-option" id="employee-select">
                         <label for="employee-list" class="label">Loại Cán Bộ </label>
-                        <select value="employee-list">
-                            <option>Bộ môn</option>
-                            <option>Phòng thí nghiệm</option>
+                        <select value="employee-list" id="type-select">
+                            <option>Giảng viên</option>
                         </select>
                     </div>
                     <div class="employee-option" id="degree-select">
                         <label for="degree-list" class="label">Học hàm, học vị </label>
-                        <select value="degree-list">
+                        <select value="degree-list" id="deg-select">
                             <option>GS</option>
                             <option>ThS</option>
                             <option>TS</option>
@@ -75,9 +74,9 @@
                     </div>
                     <div class="employee-option" id="unit-select">
                         <label for="unit-list" class="label">Đơn Vị </label>
-                        <select value="unit-list">
-                            <option>Bộ môn</option>
-                            <option>Phòng thí nghiệm</option>
+                        <select value="unit-list" id="myInput">
+                            <option value="Bộ môn">Bộ môn</option>
+                            <option value="Phòng thí nghiệm">Phòng thí nghiệm</option>
                         </select>
                     </div>
                 </div>
@@ -88,7 +87,6 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>TT</th>
                                 <th>Mã CB</th>
                                 <th>Họ và tên</th>
                                 <th>Tài khoản</th>
@@ -99,10 +97,9 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <% employee.forEach((empl, index) => { %>
-                                <tr>   
-                                    <th><%= index + 1 %></th>
+                        <tbody id="myTable">
+                            <% employee.forEach((empl) => { %>
+                                <tr>
                                     <th><%= empl.employeeId %></th>
                                     <th><%= empl.name %></th>
                                     <th><%= empl.username %></th>
@@ -123,6 +120,7 @@
                 </div>                
             </div>
         </div>
+        <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
     </body>
 </html>

@@ -14,4 +14,22 @@ $(document).ready(function(){
           } else $(this).hide();
       });
     });
+
+    $("#deg-select").change(function() {
+      var value = $(this).val();
+      $("#myTable tr").each(function() {
+          if ($(this).text().includes(value)) {
+            $(this).show();
+          } else $(this).hide();
+      });
+    });
+
+    $("#type-select").change(function() {
+      var value = $(this).val();
+      $("#myTable tr").each(function() {
+          if ($(this).text().includes(value)) {
+            $(this).show();
+          } else $(this).hide();
+      });
+    });
 });

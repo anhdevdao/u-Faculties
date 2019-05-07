@@ -64,7 +64,6 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>TT</th>
                                 <th>Tên đơn vị</th>
                                 <th>Loại đơn vị</th>
                                 <th>Địa chỉ</th>
@@ -74,9 +73,8 @@
                             </tr>
                         </thead>
                         <tbody id="myTable">
-                            <% units.forEach((unit, index) => { %>
-                                <tr>   
-                                    <th><%= index + 1 %></th>
+                            <% units.forEach((unit) => { %>
+                                <tr>
                                     <th><%= unit.name %></th>
                                     <th><%= unit.unit_type %></th>
                                     <th><%= unit.address %></th>
