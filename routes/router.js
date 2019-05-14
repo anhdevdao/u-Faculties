@@ -40,18 +40,24 @@ router.route('/')
 
 router.route('/index')
 .get((req, res) => {
-    res.render("index")
-})
-
-router.route('/field_research')
-.get((req, res) => {
     if (req.isAuthenticated()) {
-        res.render("field_research")
+        res.render("index")
     } else {
-        res.send("Ban khong co quyen")
+        res.redirect('/')
     }
 })
 
+router.route('/field_research')
+.get((req, res) => {res.render("field_research")})
+
+router.route('/profile')
+.get((req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('profile')
+    } else {
+        res.redirect('/')
+    }
+})
 // Render with HTML
 function renderHTML(path, res, data) {
     var htmlContent = fs.readFileSync(path, 'utf-8');

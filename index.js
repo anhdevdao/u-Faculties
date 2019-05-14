@@ -23,7 +23,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 1000 * 10 
+    maxAge: 1000 * 60 * 5 
   }
 }));
 
@@ -39,51 +39,6 @@ app.set("views", "./views");
 
 // Routing
 app.use('/', mainRoute);
-
-app.get('/private', (req, res) => {
-  if (req.isAuthenticated()) {
-      res.send('Welcome')
-  } else {
-      res.send('Ban khong co quyen')
-  }
-})
-
-// app.route('/signin')
-// .post(passport.authenticate('local', {
-//   successRedirect: '/index',
-//   failureRedirect: '/'
-// }))
-
-// passport.use(new localStrategy(
-//   (username, password, done) => {
-//     connection.query('SELECT * FROM account WHERE username = ?', username, function(err, results) {
-//       if (err) return err
-//       if (results) {
-//         bcrypt.compare(password, results[0].password, function(err, check) {
-//           if (check) {
-//             return done(null, results);
-//           } else {
-//             return done(null, false, {message: "Username and password doesn't match"});
-//           }
-//         })
-//       } else {
-//         console.log(results)
-//         return done(null, false, {message: "User doesn't exist"});
-//       }
-//     })
-//   }
-// ))
-
-// passport.serializeUser(function(user, done) {
-//   done(null, user);
-// });
-
-// passport.deserializeUser(function(id, done) {
-//   connection.query('SELECT * FROM account WHERE userId = ?', id, function(err, results) {
-//     done(err, results[0]);    
-//   })
-// });
-
 
 // listen port
 app.listen(8012,()=>{

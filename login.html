@@ -1,99 +1,106 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Đơn vị</title>
+        <title>TS. Lê Đình Thanh</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="./public/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="./public/css/style.css">
-        <style>
-        </style>
+        <link rel="stylesheet" type="text/css" href="public/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="public/css/style.css">
     </head>
     <body>
         <div id="surface">
             <div class="container">
                 <br>
+                <div style="display: inline-block">
+                    <h1>TS. Lê Đình Thanh</h1>
+                </div>
+                <span>
+                    <table class="component-option">
+                        <tr>
+                            <th colspan="2">
+                                <img id="profile-img" class="rounded" alt="Cinque Terre" src="public/image/thanos.jpeg">
+                            </th>
+                        </tr>
+                        <tr id="img-option">
+                            <td>
+                                <button type="button" class="btn" id="update-img">Cập nhật ảnh</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn" id="del-img">Xóa ảnh</button>
+                            </td>
+                        </tr>
+                    </table>
+                </span>
+                <br>
+                <br>
+                <div id="information-list">
+                    <ul>
+                        <li>
+                            <img src=""/>
+                            <span>Mã cán bộ: 5</span>
+                        </li>
+                        <li>
+                            <img src=""/>
+                            <span>Chức vụ: Giảng viên</span>
+                        </li>
+                        <li>
+                            <img src=""/>
+                            <span>Bộ môn: Phòng thí nghiệm an toàn thông tin</span>
+                        </li>
+                        <li>
+                            <img src=""/>
+                            <span>Học hàm, học vị: TS</span>
+                        </li>
+                        <li>
+                            <img src=""/>
+                            <span>VNU email: thanhld@vnu.edu.vn</span>
+                        </li>
+                        <li>
+                            <img src=""/>
+                            <span>Website: </span>
+                            <a href="https://uet.vnu.edu.vn/~thanhld">http://uet.vnu.edu.vn/~thanhld</a>
+                        </li>
+                        <li>
+                            <img src=""/>
+                            <span>Địa chỉ: 413-E3</span>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <br>
                 <div>
-                    <span style="display: inline-block;">
-                        <h1>Đơn vị</h1>
-                    </span>
-                    <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary create-object">Thêm mới</button>
-                    <div id="modal-wrapper" class="modal">
-  
-                        <form class="modal-content animate" action="/action_page.php">
-                              
-                          <div>
-                            <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                            <br>
-                            <h1 style="text-align:center">Thêm Đơn vị mới</h1>
-                            <br>
-                          </div>
-                      
-                          <div class="container">
-                            <form>
-                                <label class="create-label" for="name">Tên đơn vị: </label>
-                                <input id="name" name="unitName" required/>
-                                <br>
-                                <label class="create-label" for="type">Loại đơn vị: </label>
-                                <input id="type" name="unitType" required/>
-                                <br>
-                                <label class="create-label" for="addr">Địa chỉ: </label>
-                                <input id="addr" name="address" required/>
-                                <br>
-                                <label class="create-label" for="tel">Điện thoại: </label>
-                                <input id="tel" name="phone"/>
-                                <br>
-                                <label class="create-label" for="web">Website: </label>
-                                <input id="web" name="website"/>
-                                <br>
-                                <button type="submit">Thêm</button>
-                            </form>
-                          </div>
-                          
-                        </form>
-                        
+                    <div>
+                        <span style="display: inline-block">
+                            <h2 style="margin: 0;">Chủ đề nghiên cứu</h2>
+                        </span>
+                        <button type="button" class="btn btn-primary create-object">Chỉnh sửa</button>
+                    </div>
+                    <br>
+                    <div>
+                        <ul>
+                            <li>An toàn thông tin</li>
+                            <li>Phát triển ứng dụng Web</li>
+                            <li>Mạng cảm biến không dây</li>
+                        </ul>
                     </div>
                 </div>
                 <br>
-                <div style="float: right;">
-                    <label for="unit-list" class="label">Loại Đơn Vị </label>
-                    <select value="unit-list">
-                        <option>Bộ môn</option>
-                        <option>Phòng thí nghiệm</option>
-                    </select>
-                </div>
-                <br>
-                <br>
-                <br>
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>TT</th>
-                                <th>Tên đơn vị</th>
-                                <th>Loại đơn vị</th>
-                                <th>Địa chỉ</th>
-                                <th>Điện thoại</th>
-                                <th>Website</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% units.forEach((unit, index) => { %>
-                                <tr>   
-                                    <th><%= index + 1 %></th>
-                                    <th><%= unit.name %></th>
-                                    <th><%= unit.unit_type %></th>
-                                    <th><%= unit.address %></th>
-                                    <th><%= unit.phone %></th>
-                                    <th><%= unit.website%></th>
-                                    <th><%= unit.interactive %></th>
-                                </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
+                <div>
+                    <div>
+                        <span style="display: inline-block">
+                            <h2 style="margin: 0;">Lĩnh vực quan tâm</h2>
+                        </span>
+                        <button type="button" class="btn btn-primary create-object">Thêm mới</button>
+                    </div>
+                    <br>
+                    <div>
+                        <ul>
+                            <li>Network security</li>
+                            <li>Web application security</li>
+                            <li>Web protocol security</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="/public/js/myjs.js"></script>
     </body>
 </html>

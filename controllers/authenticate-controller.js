@@ -22,7 +22,7 @@ exports.userLogin = function(req, res, next) {
         if (err) {
             return next(err);
         }
-        return res.redirect('/index');
+        return res.render('index.ejs', {name: user.username});
     });
   })(req, res, next);  
 }
