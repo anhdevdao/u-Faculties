@@ -3,16 +3,20 @@ router = express.Router();
 const ejs = require("ejs");
 const fs = require("fs");
 const connection = require("../config");
+const passport = require('passport');
 
 const authenticateController = require('../controllers/authenticate-controller'),
     registerController = require('../controllers/register-controller'),
     unitController = require('../controllers/units-controller'),
     employeeController = require('../controllers/employee-controller');
 
+require('../config/passport')(passport)
 
-// router.route('/controllers/authenticateController')
-// .post(authenticateController.userLogin);
+// router.route('/signin')
+// .post(passport.authenticate('local', {successRedirect: '/index', failureRedirect: '/'}))
 
+router.route('/signin')
+.post(authenticateController.userLogin)
 
 router.route('/controllers/register-controller')
 .post(registerController.register);
@@ -20,20 +24,32 @@ router.route('/controllers/register-controller')
 router.route('/signup')
 .get((req, res) => res.render("signup"))
 
+router.route('/logout')
+.post((req, res) => {
+    console.log('logging out');
+    req.logout();
+    req.session.destroy(err => {
+        res.clearCookie();
+        res.redirect('/');
+    });
+})
+
 router.route('/')
 .get((req, res) => res.render("login"))
 .post((req, res) => res.render('login'))
 
 router.route('/index')
-.get((req, res) => res.render("index")) 
+.get((req, res) => {
+    res.render("index")
+})
 
 router.route('/field_research')
 .get((req, res) => {
-  if (req.isAuthenticated()) {
-    res.render("field_research")
-  } else {
-    res.send('Chua login')
-  }
+    if (req.isAuthenticated()) {
+        res.render("field_research")
+    } else {
+        res.send("Ban khong co quyen")
+    }
 })
 
 // Render with HTML

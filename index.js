@@ -17,14 +17,20 @@ const mainRoute = require('./routes/router');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+// Config session
+app.use(session({
+  secret: 'something',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 10 
+  }
+}));
+
 // Config passport
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Config session
-app.use(session({
-  secret: 'something'
-}));
 // app.use(passport.session());
 
 // Config ejs engine
@@ -34,38 +40,52 @@ app.set("views", "./views");
 // Routing
 app.use('/', mainRoute);
 
-app.route('/controllers/authenticateController')
-.post(passport.authenticate('local', {
-  successRedirect: '/index',
-  failureRedirect: '/'
-}))
+app.get('/private', (req, res) => {
+  if (req.isAuthenticated()) {
+      res.send('Welcome')
+  } else {
+      res.send('Ban khong co quyen')
+  }
+})
 
-passport.use(new localStrategy((username, password, done) => {
-  connection.query('SELECT * FROM account WHERE username = ?', username, function(err, results) {
-    if (results) {
-      bcrypt.compare(password, results[0].password, function(err, check) {
-        if (check) {
-          return done(null, results);
-        } else {
-          return done(null, false, {message: "Username and password doesn't match"});
-        }
-      })
-    } else {
-       return done(null, false, {message: "User doesn't exist"});
-    }
-  })
-}))
+// app.route('/signin')
+// .post(passport.authenticate('local', {
+//   successRedirect: '/index',
+//   failureRedirect: '/'
+// }))
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+// passport.use(new localStrategy(
+//   (username, password, done) => {
+//     connection.query('SELECT * FROM account WHERE username = ?', username, function(err, results) {
+//       if (err) return err
+//       if (results) {
+//         bcrypt.compare(password, results[0].password, function(err, check) {
+//           if (check) {
+//             return done(null, results);
+//           } else {
+//             return done(null, false, {message: "Username and password doesn't match"});
+//           }
+//         })
+//       } else {
+//         console.log(results)
+//         return done(null, false, {message: "User doesn't exist"});
+//       }
+//     })
+//   }
+// ))
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+// passport.serializeUser(function(user, done) {
+//   done(null, user);
+// });
+
+// passport.deserializeUser(function(id, done) {
+//   connection.query('SELECT * FROM account WHERE userId = ?', id, function(err, results) {
+//     done(err, results[0]);    
+//   })
+// });
 
 
-//listen port
+// listen port
 app.listen(8012,()=>{
   console.log('Server running on port 8012');
 });
