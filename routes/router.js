@@ -32,7 +32,13 @@ router.route('/logout')
     })
 
 router.route('/')
-    .get((req, res) => res.render("login"))
+    .get((req, res) => {
+        if (req.isAuthenticated()) {
+            res.redirect('/index');
+        } else {
+            res.render("login")
+        }
+    })
     .post((req, res) => res.render('login'))
 
 const User = require('../models/user')
@@ -70,11 +76,11 @@ function renderHTML(path, res, data) {
 
 router.route('/unit')
     .get(function (req, res) {
-        if(req.isAuthenticated()) {
-            console.log("ahhh");
-        } else {
-            console.log("nooo");
-        }
+        // if(req.isAuthenticated()) {
+        //     console.log("ahhh");
+        // } else {
+        //     console.log("nooo");
+        // }
         connection.query('SELECT * FROM units', function (err, result, fields) {
             if (err) throw err;
             renderHTML('./views/unit.ejs', res, { units: result });
@@ -84,9 +90,12 @@ router.route('/unit')
 router.route('/controllers/units-controller')
     .post(unitController.addUnit); 
 
-router.route('/manage')
+router.route('/unit-manage')
     .post(unitController.delUnit);
 
+router.route('/employee-manage')
+    .delete(employeeController.deleteEmployee)
+    .post(employeeController.editEmployee)
 
 router.route('/controllers/employee-controller')
     .post(employeeController.addEmployee);

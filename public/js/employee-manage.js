@@ -1,16 +1,12 @@
-function Add() {
-
-}
-
 function Delete(e) {
-    let strID = e.id;
-    $('#'+strID).closest('tr').remove();
+    let strName = e.id;
+    $('#'+strName).closest('tr').remove();
     $.ajax({
-        method: "post",
+        method: "delete",
         datatype: "json",
-        url: "/unit-manage",
+        url: "/employee-manage",
         data: {
-            id: strID,
+            username: strName,
             type: "delete"
         },
         success: function(data) {

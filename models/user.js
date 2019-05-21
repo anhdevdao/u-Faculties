@@ -6,16 +6,13 @@ module.exports.createUser = function(username, password, check) {
         bcrypt.hash(password, salt, function(err, hash) {
             var users = {
                 "username": username,
-                "password": hash
+                "password": hash,
+                "role": 'teacher',
             };
             // Check exist
-            // var checkExist = 'SELECT * FROM account WHERE username = ?';
-            // connection.query(checkExist, username, function(err, exist, next) {
-            //     if(err) return check(err);
-            //     if(exist) {
-            //         return check(err);
-            //     } else next;
-            // })
+            // if (user.findUser(username)) {
+            //     return check(err);
+            // }
 
             // Create User
             var insert = 'INSERT INTO account SET ?';
@@ -29,13 +26,11 @@ module.exports.createUser = function(username, password, check) {
     })
 }
 
-module.exports.findUser = function(userId) {
-    connection.query('SELECT username FROM account WHERE userId = ?', userId, function(err, results) {
+module.exports.findUser = function(username) {
+    connection.query('SELECT * FROM account WHERE username = ?', username, function(err, results) {
         if (err) return err;
-        if (results) {
-            var name = results[0].username
-            console.log(name)
-            return name;
+        if (results.length > 0) {
+            return true;
         }
     })
 }

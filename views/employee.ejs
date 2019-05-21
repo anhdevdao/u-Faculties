@@ -115,77 +115,64 @@
                             </tr>
                         </thead>
                         <tbody id="myTable">
-                            <% employee.forEach((empl) => { %>
+                            <% for(var i = 0; i < employee.length; i++) { %>
                                 <tr>
-                                    <td><%= empl.employeeId %></td>
-                                    <td><%= empl.name %></td>
-                                    <td><%= empl.username %></td>
-                                    <td><%= empl.email %></td>
-                                    <td><%= empl.employeeType%></td>
-                                    <td><%= empl.degree %></td>
-                                    <td><%= empl.company %></td>
+                                    <td><%= employee[i].employeeId %></td>
+                                    <td><%= employee[i].name %></td>
+                                    <td><%= employee[i].username %></td>
+                                    <td><%= employee[i].email %></td>
+                                    <td><%= employee[i].employeeType%></td>
+                                    <td><%= employee[i].degree %></td>
+                                    <td><%= employee[i].company %></td>
                                     <td class="interactive">
                                         <div>
-                                            <button class="btn btn-primary table-edit" onclick="document.getElementById('edit-wrapper').style.display = 'block'">Sửa</button>
+                                            <button onclick="document.getElementById('edit-wrapper').style.display = 'block'" class="btn btn-primary table-edit">Sửa</button>
                                             <div id="edit-wrapper" class="modal">
                                                 <div class="modal-content animate">      
                                                     <div>
                                                         <span onclick="document.getElementById('edit-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
                                                         <br>
-                                                        <h1 style="text-align:center">Chỉnh sửa Giảng viên</h1>
+                                                        <h2 style="text-align:center">Chỉnh sửa thông tin Giảng viên</h2>
                                                         <br>
                                                     </div>
                                                     <div class="sub-container">
-                                                        <form action='' method=''>
+                                                        <form action='/employee-manage' method='POST'>
                                                             <label class="create-label" for="id">Mã cán bộ: </label>
-                                                            <input id="id" class="input-box" name="employeeId" required/>
+                                                            <input id="edit-id" class="input-box" name="id"/>
                                                             <br>
                                                             <label class="create-label" for="name">Họ và tên: </label>
-                                                            <input id="name" class="input-box" name="name" required/>
+                                                            <input id="edit-name" class="input-box" name="edit-name"/>
                                                             <br>
                                                             <label class="create-label" for="acc">Tài khoản: </label>
-                                                            <input id="acc" class="input-box" name="username" required/>
+                                                            <input id="edit-acc" class="input-box" name="edit-username"/>
                                                             <br>
                                                             <label class="create-label" for="mail">VNU Email: </label>
-                                                            <input id="mail" class="input-box" name="email"/>
+                                                            <input id="edit-mail" class="input-box" name="edit-email"/>
+                                                            <br>
+                                                            <label class="create-label" for="pwd">Mật khẩu: </label>
+                                                            <input id="edit-pwd" class="input-box" name="edit-password" type="password" required/>
                                                             <br>
                                                             <label class="create-label" for="type">Loại CB: </label>
-                                                            <input id="type" class="input-box" name="employeeType" required/>
+                                                            <input id="edit-type" class="input-box" name="edit-employeeType"/>
                                                             <br>
                                                             <label class="create-label" for="deg">Học vị: </label>
-                                                            <input id="deg" class="input-box" name="degree"/>
+                                                            <input id="edit-deg" class="input-box" name="edit-degree"/>
                                                             <br>
                                                             <label class="create-label" for="unit">Nơi công tác: </label>
-                                                            <input id="unit" class="input-box" name="company" required/>
+                                                            <input id="edit-unit" class="input-box" name="edit-company"/>
                                                             <br>
                                                             <br>
-                                                            <button class="btn btn-primary">Lưu</button>
-                                                            <button class="btn btn-secondary">Hủy bỏ</button>
+                                                            <button id="edit" class="btn btn-primary">Lưu</button>
+                                                            <button onclick="document.getElementById('edit-wrapper').style.display='none'" class="btn btn-secondary">Hủy bỏ</button> 
                                                         </form>
                                                     </div> 
                                                 </div>
                                             </div>
-                                            <button class="btn btn-secondary table-edit" onclick="document.getElementById('delete-wrapper').style.display = 'block'">Xóa</button>
-                                            <div id="delete-wrapper" class="modal">
-                                                <div class="modal-content animate">
-                                                    <div>
-                                                        <span onclick="document.getElementById('delete-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                                                        <br>
-                                                        <h2 style="text-align:center">Bạn có chắc chắn xóa không?</h2>
-                                                        <br>
-                                                    </div>
-                                                    <div class="sub-container">
-                                                        <form action="" method="">
-                                                           <button class="btn btn-danger">Có</button>
-                                                           <button class="btn btn-secondary">Không</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <button onclick="Delete(this)" id="<%= employee[i].username %>" class="btn btn-secondary table-edit">Xóa</button>
                                         </div>
                                     </td>
                                 </tr>
-                            <% }); %>
+                            <% }; %>
                         </tbody>
                     </table>
                 </div>                
@@ -195,6 +182,7 @@
         </div>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
+        <script type="text/javascript" src="/js/employee-manage.js"></script>
         <script type="text/javascript">
             $(document).ready(() => {
                 

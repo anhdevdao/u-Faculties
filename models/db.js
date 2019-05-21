@@ -16,7 +16,7 @@ exports.deleteUnit = function(id) {
         if (rows.length > 0) {
             connection.query("DELETE FROM units WHERE id = ?", id, function(err, result) {
                 if (err) return err;
-                console.log("Remove unit:" + id);
+                console.log("Removed unit:" + id);
             })
         } else {
             console.log("Cannot find unit");
@@ -42,14 +42,29 @@ exports.createEmployee = function(employeeId, name, username, email, password, e
         } else {
             user.createUser(username, password, (err) => {
                 if (err) {
-                  res.json({
-                    status: false,
-                    message: 'Sign up failed'
-                  })
+                    return check(err);
                 }
                 return check(null);
-              })
+            })
         }
         //return check(null);
+    })
+}
+
+exports.deleteEmployee = function(username) {
+    connection.query("SELECT * FROM employee WHERE username = ?", username, function(err, rows) {
+        if (err) return err;
+        if (rows.length > 0) {
+            connection.query("DELETE FROM employee WHERE username = ?", username, function(err, result) {
+                if (err) return err;
+                console.log("Removed user from employee: " + username)
+            })
+            connection.query("DELETE FROM account WHERE username = ?", username, function(err, result) {
+                if (err) return err;
+                console.log("Removed user from account: " + username)
+            })
+        } else {
+            console.log("Cannot find user");
+        }
     })
 }

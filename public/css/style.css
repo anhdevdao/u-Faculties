@@ -137,6 +137,10 @@ label {
     margin: auto;
     display: block;
 }
+.sub-container button[id='addEmpl'] {
+    margin: auto;
+    display: block;
+}
 .sub-container input {
     width: 50%;
 }

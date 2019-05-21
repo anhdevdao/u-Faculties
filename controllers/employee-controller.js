@@ -13,7 +13,6 @@ module.exports.addEmployee = function(req, res) {
     })
 }
 
-
 module.exports.addEmployeeByExcel = function(req, res) {
     var excel = xlsx.readFile(req.body.file)
     var ws = excel.Sheets;
@@ -22,5 +21,15 @@ module.exports.addEmployeeByExcel = function(req, res) {
 }
 
 module.exports.deleteEmployee = function(req, res) {
-    // db
+    console.log(req.body.username);
+    console.log(req.body.type);
+    if(req.body.type === 'delete') {
+        db.deleteEmployee(req.body.username);
+    }
+}
+
+module.exports.editEmployee = function(req, res) {
+    // db.modifyEmployee(req.body.id, req.body.edit-name, req.body.edit-username, req.body.edit-email, req.body.edit-password, req.body.edit-employeeType, req.body.edit-degree, edit-company, (err) => {
+
+    // })
 }
