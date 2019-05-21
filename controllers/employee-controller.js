@@ -1,7 +1,8 @@
 const db = require('../models/db');
+const xlsx = require('xlsx');
 
 module.exports.addEmployee = function(req, res) {
-    db.createEmployee(req.body.employeeId, req.body.name, req.body.username, req.body.email, req.body.employeeType, req.body.degree, req.body.company, (err) => {
+    db.createEmployee(req.body.employeeId, req.body.name, req.body.username, req.body.email, req.body.password, req.body.employeeType, req.body.degree, req.body.company, (err) => {
         if (err) {
             res.json({
                 status: false,
@@ -10,4 +11,16 @@ module.exports.addEmployee = function(req, res) {
         }
         return res.redirect('/employee');
     })
+}
+
+
+module.exports.addEmployeeByExcel = function(req, res) {
+    var excel = xlsx.readFile(req.body.file)
+    var ws = excel.Sheets;
+    var data = xlsx.utils.sheet_to_json(ws)
+    console.log(data);
+}
+
+module.exports.deleteEmployee = function(req, res) {
+    // db
 }

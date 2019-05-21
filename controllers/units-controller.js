@@ -8,18 +8,15 @@ module.exports.addUnit = function(req, res) {
                 message: 'Creating failed'
             })
         }
+        // return res.json({status: true, message: "ahihi"})
         return res.redirect('/unit');
     })
 }
 
 module.exports.delUnit = function(req, res) {
-    db.deleteUnit((err) => {
-        if (err) {
-            res.json({
-                status: false,
-                message: 'Deleting failed'
-            })
-        }
-        return res.redirect('/unit');
-    })
+    console.log(req.body.id);
+    console.log(req.body.type);
+    if(req.body.type === "delete") {
+        db.deleteUnit(req.body.id)
+    }
 }

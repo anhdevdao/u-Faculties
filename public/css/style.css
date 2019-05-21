@@ -83,9 +83,13 @@ label {
     height: 200px;
     margin-bottom: 10px;
 }
+/* Field tree */
 #field-list {
     padding: 0 20px;
     border: 1px solid grey;
+}
+.field-option {
+    right: 0px;
 }
 /* Pop up Form */
 .modal {
@@ -138,4 +142,8 @@ label {
 }
 .table-edit {
     display: inline-block;
+}
+/* Interactive */
+.interactive {
+    text-align: center;
 }

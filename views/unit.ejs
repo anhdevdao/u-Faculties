@@ -24,7 +24,6 @@
                             <h1 style="text-align:center">Thêm Đơn vị</h1>
                             <br>
                           </div>
-                      
                           <div class="sub-container">
                             <form action='/controllers/units-controller' method='POST'>
                                 <label class="create-label" for="name">Tên đơn vị: </label>
@@ -45,14 +44,14 @@
                                 <br>
                                 <button type="submit" class="btn btn-primary">Thêm</button>
                             </form>
-                          </div>
-                        </form> 
+                          </div> 
+                        </div>
                     </div>
-                </div>
                 <br>
                 <div style="float: right;">
                     <label for="unit-list" class="label">Loại Đơn Vị: </label>
                     <select value="unit-list" id="myInput">
+                        <option value=" ">Tất cả</option>
                         <option value="Bộ môn">Bộ môn</option>
                         <option value="Phòng thí nghiệm">Phòng thí nghiệm</option>
                     </select>
@@ -61,7 +60,7 @@
                 <br>
                 <br>
                 <div class="col-md-12">
-                    <table class="table table-bordered">
+                    <table id="table" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Tên đơn vị</th>
@@ -73,21 +72,21 @@
                             </tr>
                         </thead>
                         <tbody id="myTable">
-                            <% units.forEach((unit) => { %>
+                            <% for(var i=0; i < units.length; i++) { %>
                                 <tr>
-                                    <th><%= unit.name %></th>
-                                    <th><%= unit.unit_type %></th>
-                                    <th><%= unit.address %></th>
-                                    <th><%= unit.phone %></th>
-                                    <th><%= unit.website%></th>
-                                    <th>
-                                        <div class="btn-group">
+                                    <td><%= units[i].name %></td>
+                                    <td><%= units[i].unit_type %></td>
+                                    <td><%= units[i].address %></td>
+                                    <td><%= units[i].phone %></td>
+                                    <td><%= units[i].website %></td>
+                                    <td class="interactive">
+                                        <div>
                                             <button class="btn btn-primary table-edit">Sửa</button>
-                                            <button class="btn btn-secondary table-edit">Xóa</button>
+                                            <button onclick="Delete(this)" id="<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
                                         </div>
-                                    </th>
+                                    </td>
                                 </tr>
-                            <% }); %>
+                            <% }; %>
                         </tbody>
                     </table>
                 </div>
@@ -95,5 +94,17 @@
         </div>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
+        <script type="text/javascript" src="/js/unit-manage.js"></script>
+        <script type="text/javascript">
+            // add row
+            // function addHtmlTableRow() {
+            //     var table = document.getElementById("#table"),
+            //         newRow = table.insertRow(table.length),
+            //         cell1 = newRow.insertCell(0),
+            //         cell2 = newRow.insertCell(1),
+            //         cell3 = newRow.insertCell(2),
+
+            // }
+        </script>
     </body>
 </html>

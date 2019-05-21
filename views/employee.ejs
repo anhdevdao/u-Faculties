@@ -38,6 +38,9 @@
                                         <label class="create-label" for="mail">VNU Email: </label>
                                         <input id="mail" class="input-box" name="email"/>
                                         <br>
+                                        <label class="create-label" for="pwd">Mật khẩu: </label>
+                                        <input id="pwd" class="input-box" name="password" type="password" required/>
+                                        <br>
                                         <label class="create-label" for="type">Loại CB: </label>
                                         <input id="type" class="input-box" name="employeeType" required/>
                                         <br>
@@ -48,12 +51,26 @@
                                         <input id="unit" class="input-box" name="company" required/>
                                         <br>
                                         <br>
-                                        <button type="submit" class="btn btn-primary">Thêm</button>
+                                        <button id="addEmpl" class="btn btn-primary">Thêm</button>
                                     </form>
                                 </div> 
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary">Thêm từ Excel</button>
+                        <button onclick="document.getElementById('excel-wrapper').style.display = 'block'" type="button" class="btn btn-primary">Thêm từ Excel</button>
+                        <div id="excel-wrapper" class="modal">
+                            <div class="modal-content animate">
+                                <div>
+                                    <span onclick="document.getElementById('excel-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                    <br>
+                                    <h1 style="text-align:center">Thêm Giảng viên từ Excel</h1>
+                                    <br>
+                                </div>
+                                <div class="sub-container">
+                                    Chọn file: <input id="input-excel" type="file" name="file" accept=".xlsx, .xls"><br><br>
+                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 <br>
                 <div style="float: right;">
@@ -84,7 +101,7 @@
                 <br>
                 <br>
                 <div class="col-md-12">
-                    <table class="table table-bordered">
+                    <table id="table" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Mã CB</th>
@@ -100,27 +117,99 @@
                         <tbody id="myTable">
                             <% employee.forEach((empl) => { %>
                                 <tr>
-                                    <th><%= empl.employeeId %></th>
-                                    <th><%= empl.name %></th>
-                                    <th><%= empl.username %></th>
-                                    <th><%= empl.email %></th>
-                                    <th><%= empl.employeeType%></th>
-                                    <th><%= empl.degree %></th>
-                                    <th><%= empl.company %></th>
-                                    <th>
-                                        <div class="btn-group">
-                                            <button class="btn btn-primary table-edit">Sửa</button>
-                                            <button class="btn btn-secondary table-edit">Xóa</button>
+                                    <td><%= empl.employeeId %></td>
+                                    <td><%= empl.name %></td>
+                                    <td><%= empl.username %></td>
+                                    <td><%= empl.email %></td>
+                                    <td><%= empl.employeeType%></td>
+                                    <td><%= empl.degree %></td>
+                                    <td><%= empl.company %></td>
+                                    <td class="interactive">
+                                        <div>
+                                            <button class="btn btn-primary table-edit" onclick="document.getElementById('edit-wrapper').style.display = 'block'">Sửa</button>
+                                            <div id="edit-wrapper" class="modal">
+                                                <div class="modal-content animate">      
+                                                    <div>
+                                                        <span onclick="document.getElementById('edit-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                                        <br>
+                                                        <h1 style="text-align:center">Chỉnh sửa Giảng viên</h1>
+                                                        <br>
+                                                    </div>
+                                                    <div class="sub-container">
+                                                        <form action='' method=''>
+                                                            <label class="create-label" for="id">Mã cán bộ: </label>
+                                                            <input id="id" class="input-box" name="employeeId" required/>
+                                                            <br>
+                                                            <label class="create-label" for="name">Họ và tên: </label>
+                                                            <input id="name" class="input-box" name="name" required/>
+                                                            <br>
+                                                            <label class="create-label" for="acc">Tài khoản: </label>
+                                                            <input id="acc" class="input-box" name="username" required/>
+                                                            <br>
+                                                            <label class="create-label" for="mail">VNU Email: </label>
+                                                            <input id="mail" class="input-box" name="email"/>
+                                                            <br>
+                                                            <label class="create-label" for="type">Loại CB: </label>
+                                                            <input id="type" class="input-box" name="employeeType" required/>
+                                                            <br>
+                                                            <label class="create-label" for="deg">Học vị: </label>
+                                                            <input id="deg" class="input-box" name="degree"/>
+                                                            <br>
+                                                            <label class="create-label" for="unit">Nơi công tác: </label>
+                                                            <input id="unit" class="input-box" name="company" required/>
+                                                            <br>
+                                                            <br>
+                                                            <button class="btn btn-primary">Lưu</button>
+                                                            <button class="btn btn-secondary">Hủy bỏ</button>
+                                                        </form>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-secondary table-edit" onclick="document.getElementById('delete-wrapper').style.display = 'block'">Xóa</button>
+                                            <div id="delete-wrapper" class="modal">
+                                                <div class="modal-content animate">
+                                                    <div>
+                                                        <span onclick="document.getElementById('delete-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                                        <br>
+                                                        <h2 style="text-align:center">Bạn có chắc chắn xóa không?</h2>
+                                                        <br>
+                                                    </div>
+                                                    <div class="sub-container">
+                                                        <form action="" method="">
+                                                           <button class="btn btn-danger">Có</button>
+                                                           <button class="btn btn-secondary">Không</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </th>
+                                    </td>
                                 </tr>
                             <% }); %>
                         </tbody>
                     </table>
                 </div>                
             </div>
+            <button id="btn">Test</button>
+            <div id="frame"></div>
         </div>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
+        <script type="text/javascript">
+            $(document).ready(() => {
+                
+                // $("#btn").click(() => {
+                //     $.ajax({
+                //         url: '/',
+                //         type: 'GET',
+                //         dataType: 'html',
+                //         success: (data) => {
+                //             //console.log("ajax success!", data);
+                //             $('#frame').html(data);
+                //         }
+                //     })
+                // })
+            })
+        </script>
     </body>
 </html>

@@ -81,7 +81,24 @@
                         <span style="display: inline-block">
                             <h2 style="margin: 0;">Lĩnh vực quan tâm</h2>
                         </span>
-                        <button type="button" class="btn btn-primary create-object">Thêm mới</button>
+                        <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary create-object">Thêm mới</button>
+                        <div id="modal-wrapper" class="modal">
+  
+                            <div class="modal-content animate">
+                              <div>
+                                <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                <br>
+                                <h1 style="text-align:center">Thêm Lĩnh vực quan tâm</h1>
+                                <br>
+                              </div>
+                          
+                              <div class="sub-container">
+                                <form action='' method=''>
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                </form>
+                              </div> 
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <div>
@@ -94,5 +111,7 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/js/myjs.js"></script>
     </body>
 </html>

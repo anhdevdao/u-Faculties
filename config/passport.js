@@ -22,13 +22,13 @@ module.exports = function(passport) {
   ))
 
   passport.serializeUser((user, done) => {
-      done(null, user.userId)
+      done(null, user.username, user.role)
   })
 
-  passport.deserializeUser((id, done) => {
-    connection.query('SELECT * FROM account WHERE userId = ?', id, function(err, results) {
+  passport.deserializeUser((name, done) => {
+    connection.query('SELECT * FROM account WHERE username = ?', name, function(err, results) {
       if (err) return err
-      if (results) {
+      if (results) {  
         return done(null, results)
       } else {
         return done(null, false)

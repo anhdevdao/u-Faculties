@@ -1,13 +1,10 @@
 const ejs = require("ejs");
 const express = require("express");
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const bodyParser = require("body-parser");
 const { parse } = require("querystring");
-const bcrypt = require('bcrypt');
 
-const connection = require("./config");
 const app = express();
 
 app.use(express.static(__dirname + '/public'));
