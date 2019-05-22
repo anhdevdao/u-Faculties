@@ -15,6 +15,7 @@
                         <h1>Cán bộ</h1>
                     </span>
                     <div class="create-object">
+                        <% if (role === "admin") { %> 
                         <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary">Thêm mới</button>
                         <div id="modal-wrapper" class="modal">
                             <div class="modal-content animate">      
@@ -70,7 +71,8 @@
                                     <button type="submit" class="btn btn-primary">Upload</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
+                        <% } else {} %>
                     </div>
                 <br>
                 <div style="float: right;">
@@ -111,7 +113,9 @@
                                 <th>Loại CB</th>
                                 <th>Học vị</th>
                                 <th>Đơn vị công tác</th>
-                                <th>Thao tác</th>
+                                <% if (role === "admin") { %> 
+                                    <th>Thao tác</th>
+                                <% } else {} %>
                             </tr>
                         </thead>
                         <tbody id="myTable">
@@ -124,6 +128,7 @@
                                     <td><%= employee[i].employeeType%></td>
                                     <td><%= employee[i].degree %></td>
                                     <td><%= employee[i].company %></td>
+                                    <% if (role === "admin") { %>
                                     <td class="interactive">
                                         <div>
                                             <button onclick="document.getElementById('edit-wrapper').style.display = 'block'" class="btn btn-primary table-edit">Sửa</button>
@@ -171,33 +176,16 @@
                                             <button onclick="Delete(this)" id="<%= employee[i].username %>" class="btn btn-secondary table-edit">Xóa</button>
                                         </div>
                                     </td>
+                                    <% } else {} %>
                                 </tr>
                             <% }; %>
                         </tbody>
                     </table>
                 </div>                
             </div>
-            <button id="btn">Test</button>
-            <div id="frame"></div>
         </div>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
         <script type="text/javascript" src="/js/employee-manage.js"></script>
-        <script type="text/javascript">
-            $(document).ready(() => {
-                
-                // $("#btn").click(() => {
-                //     $.ajax({
-                //         url: '/',
-                //         type: 'GET',
-                //         dataType: 'html',
-                //         success: (data) => {
-                //             //console.log("ajax success!", data);
-                //             $('#frame').html(data);
-                //         }
-                //     })
-                // })
-            })
-        </script>
     </body>
 </html>

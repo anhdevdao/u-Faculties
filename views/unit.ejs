@@ -14,6 +14,7 @@
                     <span style="display: inline-block;">
                         <h1>Đơn vị</h1>
                     </span>
+                    <% if (role === "admin") { %>
                     <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary create-object">Thêm mới</button>
                     <div id="modal-wrapper" class="modal">
   
@@ -47,6 +48,7 @@
                           </div> 
                         </div>
                     </div>
+                    <% } else {} %>
                 <br>
                 <div style="float: right;">
                     <label for="unit-list" class="label">Loại Đơn Vị: </label>
@@ -68,7 +70,9 @@
                                 <th>Địa chỉ</th>
                                 <th>Điện thoại</th>
                                 <th>Website</th>
-                                <th>Thao tác</th>
+                                <% if (role === "admin") { %> 
+                                    <th>Thao tác</th>
+                                <% } else {} %>
                             </tr>
                         </thead>
                         <tbody id="myTable">
@@ -79,12 +83,14 @@
                                     <td><%= units[i].address %></td>
                                     <td><%= units[i].phone %></td>
                                     <td><%= units[i].website %></td>
-                                    <td class="interactive">
-                                        <div>
-                                            <button class="btn btn-primary table-edit">Sửa</button>
-                                            <button onclick="Delete(this)" id="<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
-                                        </div>
-                                    </td>
+                                    <% if (role === "admin") { %>
+                                        <td class="interactive">
+                                            <div>
+                                                <button class="btn btn-primary table-edit">Sửa</button>
+                                                <button onclick="Delete(this)" id="<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
+                                            </div>
+                                        </td>
+                                    <% } else {} %>
                                 </tr>
                             <% }; %>
                         </tbody>

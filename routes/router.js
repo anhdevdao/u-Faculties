@@ -76,15 +76,17 @@ function renderHTML(path, res, data) {
 
 router.route('/unit')
     .get(function (req, res) {
-        // if(req.isAuthenticated()) {
-        //     console.log("ahhh");
-        // } else {
-        //     console.log("nooo");
-        // }
-        connection.query('SELECT * FROM units', function (err, result, fields) {
-            if (err) throw err;
-            renderHTML('./views/unit.ejs', res, { units: result });
-        });
+        if(req.isAuthenticated()) {
+            connection.query('SELECT * FROM units', function (err, result, fields) {
+                if (err) throw err;
+                renderHTML('./views/unit.ejs', res, { units: result, role: req.user[0].role });
+            });
+        } else {
+            connection.query('SELECT * FROM units', function (err, result, fields) {
+                if (err) throw err;
+                renderHTML('./views/unit.ejs', res, { units: result, role: "guest" });
+            });
+        }
     })
 
 router.route('/controllers/units-controller')
@@ -102,15 +104,32 @@ router.route('/controllers/employee-controller')
 
 router.route('/employee')
     .get(function (req, res) {
-        connection.query('SELECT * FROM employee', function (err, result, fields) {
-            if (err) throw err;
-            renderHTML('./views/employee.ejs', res, { employee: result });
-        });
+        if(req.isAuthenticated()) {
+            connection.query('SELECT * FROM employee', function (err, result, fields) {
+                if (err) throw err;
+                renderHTML('./views/employee.ejs', res, { employee: result, role: req.user[0].role });
+            });
+        } else {
+            connection.query('SELECT * FROM employee', function (err, result, fields) {
+                if (err) throw err;
+                renderHTML('./views/employee.ejs', res, { employee: result, role: "guest" });
+            });
+        }
     })
 
 
 
 router.route('/upload')
     .post(employeeController.addEmployeeByExcel)
+
+router.route('/session')
+    .get((req, res) => {
+        if (req.isAuthenticated()) {
+            console.log(req.user[0].role)
+            res.redirect('/employee')
+        } else {
+            res.redirect('/');
+        }
+    })
 
 module.exports = router;
