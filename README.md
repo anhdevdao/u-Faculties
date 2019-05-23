@@ -6,6 +6,7 @@ Website giúp sinh viên và giảng viên có thể  tìm hiểu cũng như the
 - Clone repo này về  máy
 - Chạy lệnh:
     ```
+    npm 
     npm run dev
     ```
 
