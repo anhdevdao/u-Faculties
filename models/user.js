@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const connection = require('../config');
+const connection = require('../config/database');
 
 module.exports.createUser = function(username, password, check) {
     bcrypt.genSalt(10, function(err, salt) {

@@ -8,6 +8,7 @@
     </head>
     <body>
         <div id="surface">
+            <% include partials/head.ejs %>
             <div class="container">
                 <br>
                 <div>
@@ -31,7 +32,10 @@
                                 <input id="name" class="input-box" name="unitName" required/>
                                 <br>
                                 <label class="create-label" for="type">Loại đơn vị: </label>
-                                <input id="type" class="input-box" name="unitType" required/>
+                                <select class="input-box" id="type" name="unitType">
+                                    <option value="Bộ môn">Bộ môn</option>
+                                    <option value="Phòng thí nghiệm">Phòng thí nghiệm</option>
+                                </select>
                                 <br>
                                 <label class="create-label" for="addr">Địa chỉ: </label>
                                 <input id="addr" class="input-box" name="address"/>
@@ -82,7 +86,7 @@
                                     <td><%= units[i].unit_type %></td>
                                     <td><%= units[i].address %></td>
                                     <td><%= units[i].phone %></td>
-                                    <td><%= units[i].website %></td>
+                                    <td><a href="<%= units[i].website %>"><%= units[i].website %></a></td>
                                     <% if (role === "admin") { %>
                                         <td class="interactive">
                                             <div>
@@ -98,6 +102,7 @@
                 </div>
             </div>
         </div>
+        <% include partials/foot.ejs %>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
         <script type="text/javascript" src="/js/unit-manage.js"></script>

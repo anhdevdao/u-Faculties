@@ -1,4 +1,4 @@
-const connection = require('../config');
+const connection = require('../config/database');
 const user = require('../models/user');
 
 exports.createUnit = function(unitName, unitType, address, phone, website, check) {
@@ -24,13 +24,14 @@ exports.deleteUnit = function(id) {
     });
 }
 
-exports.getListUnit = function() {
+exports.getListUnit = function(cb) {
     connection.query('SELECT * FROM units', function(err, rows) {
         if (err) throw err;
         if (rows.length > 0) {
-            users = rows;
+            cb(rows);
+            return rows;
         } else {
-            users = null;
+            return null;
         }
     })
 }

@@ -14,9 +14,11 @@ module.exports.addUnit = function(req, res) {
 }
 
 module.exports.delUnit = function(req, res) {
-    console.log(req.body.id);
-    console.log(req.body.type);
     if(req.body.type === "delete") {
         db.deleteUnit(req.body.id)
     }
+}
+
+module.exports.renderUnit = function(req, res) {
+   
 }

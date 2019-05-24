@@ -8,6 +8,7 @@
     </head>
     <body>
         <div id="surface">
+            <% include partials/head.ejs %>
             <div class="container">
                 <br>
                 <div>
@@ -79,12 +80,14 @@
                     <div class="employee-option" id="employee-select">
                         <label for="employee-list" class="label">Loại Cán Bộ </label>
                         <select value="employee-list" id="type-select">
+                            <option value=" ">Tất cả</option>
                             <option>Giảng viên</option>
                         </select>
                     </div>
                     <div class="employee-option" id="degree-select">
                         <label for="degree-list" class="label">Học hàm, học vị </label>
                         <select value="degree-list" id="deg-select">
+                            <option value=" ">Tất cả</option>
                             <option>GS</option>
                             <option>ThS</option>
                             <option>TS</option>
@@ -94,6 +97,7 @@
                     <div class="employee-option" id="unit-select">
                         <label for="unit-list" class="label">Đơn Vị </label>
                         <select value="unit-list" id="myInput">
+                            <option value=" ">Tất cả</option>
                             <option value="Bộ môn">Bộ môn</option>
                             <option value="Phòng thí nghiệm">Phòng thí nghiệm</option>
                         </select>
@@ -173,7 +177,7 @@
                                                     </div> 
                                                 </div>
                                             </div>
-                                            <button onclick="Delete(this)" id="<%= employee[i].username %>" class="btn btn-secondary table-edit">Xóa</button>
+                                            <button onclick="Delete(this)" id="delete-<%= employee[i].username %>" class="btn btn-secondary table-edit">Xóa</button>
                                         </div>
                                     </td>
                                     <% } else {} %>
@@ -184,6 +188,7 @@
                 </div>                
             </div>
         </div>
+        <% include partials/foot.ejs %>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
         <script type="text/javascript" src="/js/employee-manage.js"></script>

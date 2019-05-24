@@ -1,7 +1,3 @@
-function Add() {
-
-}
-
 function Delete(e) {
     let strID = e.id;
     $('#'+strID).closest('tr').remove();

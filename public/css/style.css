@@ -1,3 +1,6 @@
+body {
+    color: #171F2A;
+}
 a, a:hover {
     text-decoration: none;
 }
@@ -22,7 +25,12 @@ button:hover {
 }
 #header {
     max-width: 100%;
-    background-color:rgb(71, 141, 50);
+    background-color:rgb(0, 134, 0);
+}
+/* Login page */
+#logo {
+    width: 80px;
+    height: 80px;
 }
 #header-user {
     float: right;
@@ -46,7 +54,6 @@ table#login tbody tr th {
 }
 #slogan {
     text-align: center;
-    font-family: 
 }
 #search-bar {
     min-width: 300px;
@@ -58,6 +65,10 @@ table#login tbody tr th {
     left: 25%;
     z-index: 1;
 }
+#home {
+    background-image: url('../image/background1.jpg')
+}
+/*  */
 .create-object {
     float: right;
 }
@@ -78,10 +89,17 @@ label {
     border: 1px solid gray;
 }
 #profile-img {
-    
     width: 300px;
     height: 200px;
     margin-bottom: 10px;
+}
+#information-list ul li {
+    margin-bottom: 10px;
+}
+.info-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 /* Field tree */
 #field-list {
@@ -103,7 +121,7 @@ label {
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
 }
-
+/*  */
 .modal-content {
     background-color: #fefefe;
     margin: 4% auto 15% auto;
@@ -143,6 +161,9 @@ label {
 }
 .sub-container input {
     width: 50%;
+}
+thead tr {
+    background-color: #9BCA3B;
 }
 .table-edit {
     display: inline-block;

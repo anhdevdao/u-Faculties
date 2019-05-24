@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const connection = require('../config');
+const connection = require('./database');
 
 module.exports = function(passport) {
   passport.use(new LocalStrategy(
@@ -22,7 +22,6 @@ module.exports = function(passport) {
   ))
 
   passport.serializeUser((user, done) => {
-      console.log(user.role);
       done(null, user.username, user.role)
   })
 

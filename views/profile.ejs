@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TS. Lê Đình Thanh</title>
+        <title><%= user[0].degree %>. <%= user[0].name %></title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
     <body>
         <div id="surface">
+            <% include partials/head.ejs %>
             <div class="container">
                 <br>
                 <div style="display: inline-block">
-                    <h1>TS. Lê Đình Thanh</h1>
+                    <h1><%= user[0].degree %>. <%= user[0].name %></h1>
                 </div>
                 <span>
                     <div class="component-option">
@@ -27,32 +28,32 @@
                 <div id="information-list">
                     <ul>
                         <li>
-                            <img src=""/>
-                            <span>Mã cán bộ: 5</span>
+                            <img class="info-icon" src="/image/id.png"/>
+                            <span>Mã cán bộ: <%= user[0].employeeId %></span>
                         </li>
                         <li>
-                            <img src=""/>
-                            <span>Chức vụ: Giảng viên</span>
+                            <img class="info-icon" src="/image/deg.png"/>
+                            <span>Chức vụ: <%= user[0].employeeType %></span>
                         </li>
                         <li>
-                            <img src=""/>
-                            <span>Bộ môn: Phòng thí nghiệm an toàn thông tin</span>
+                            <img class="info-icon" src="/image/smart-city.png"/>
+                            <span>Đơn vị: <%= user[0].company %></span>
                         </li>
                         <li>
-                            <img src=""/>
-                            <span>Học hàm, học vị: TS</span>
+                            <img class="info-icon" src="/image/about-us.png"/>
+                            <span>Học hàm, học vị: <%= user[0].degree %></span>
                         </li>
                         <li>
-                            <img src=""/>
-                            <span>VNU email: thanhld@vnu.edu.vn</span>
+                            <img class="info-icon" src="/image/close-envelope.png"/>
+                            <span>VNU email: <%= user[0].email %></span>
                         </li>
                         <li>
-                            <img src=""/>
+                            <img class="info-icon" src="/image/web.png"/>
                             <span>Website: </span>
                             <a href="https://uet.vnu.edu.vn/~thanhld">http://uet.vnu.edu.vn/~thanhld</a>
                         </li>
                         <li>
-                            <img src=""/>
+                            <img class="info-icon" src="/image/home.png"/>
                             <span>Địa chỉ: 413-E3</span>
                         </li>
                     </ul>
@@ -111,6 +112,7 @@
                 </div>
             </div>
         </div>
+        <% include partials/foot.ejs %>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/js/myjs.js"></script>
     </body>

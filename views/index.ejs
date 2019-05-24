@@ -9,19 +9,23 @@
 </head>
 
 <body>
-    <div id="surface">
+    <div id="surface home">
         <div id="header">
             <div class="container clear-fix">
-                <a href="localhost:8000" id="logo-page">
-                    <span id="header-logo"></span>
+                <a href="/" id="logo-page">
+                    <span id="header-logo">
+                        <img id="logo" src="/image/logo.png">
+                    </span>
                 </a>
                 <div id="header-user">
                     <table id=login>
                         <tbody>
                             <tr>
+                                <th></th>
+                                <th></th>
                             </tr>
                             <tr>
-                                <th>Xin chào, <a href="/profile"><%= name %></a></th>
+                                <th style="font-weight: bold; color: #fff;">Xin chào, <a href="/profile"><%= name %></a></th>
                                 <th>
                                     <form action="/logout" method="POST">
                                         <button class="btn btn-success" type="submit">Đăng xuất</button>
@@ -36,34 +40,38 @@
                 </div>
             </div>
         </div>
-        <div class="container clear-fix">
-            <ul id="main-content">
-                <br>
-                <div>
-                    <h1 id="slogan">Trang thông tin giảng viên</h1>
-                </div>
-                <br>
-                <div class="form-group has-search">
-                    <input type="text" class="form-control" placeholder="Bạn muốn tìm kiếm gì?...">
-                </div>
-                <br>
-                <br>
-                <nav class="navbar navbar-expand-sm bg-light">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="unit">Đơn vị</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="field_research">Lĩnh vực nghiên cứu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="employee">Giảng viên</a>
-                        </li>
-                    </ul>
-                </nav>
+        <div class="slider-container">
+            <div class="container clear-fix">
+                <ul id="main-content">
+                    <br>
+                    <div>
+                        <h1 id="slogan">Trang thông tin giảng viên</h1>
+                    </div>
+                    <br>
+                    <nav class="navbar navbar-expand-sm bg-light">
+                        <ul class="navbar-nav">
+                            <% if (role === "admin") { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="unit">Đơn vị</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="field_research">Lĩnh vực nghiên cứu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="employee">Giảng viên</a>
+                            </li>
+                            <% } else { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Tìm kiếm</a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                </ul>
+            </div>
         </div>
     </div>
-    </div>
+    <% include partials/foot.ejs %>
 </body>
 
 </html>
