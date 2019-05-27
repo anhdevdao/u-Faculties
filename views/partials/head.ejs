@@ -5,7 +5,8 @@
                 <img id="logo" src="/image/logo.png">
             </span>
         </a>
-        <% if (name) { %>
+        <% if (role === "guest") { %>
+        <% } else if (name) { %>
         <div id="header-user">
             <table id=login>
                 <tbody>

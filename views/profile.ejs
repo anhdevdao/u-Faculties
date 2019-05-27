@@ -12,15 +12,19 @@
             <div class="container">
                 <br>
                 <div style="display: inline-block">
-                    <h1><%= user[0].degree %>. <%= user[0].name %></h1>
+                    <h1 style="font-weight: 800;"><%= user[0].degree %>. <%= user[0].name %></h1>
                 </div>
                 <span>
-                    <div class="component-option">
-                        <img id="profile-img" class="rounded" alt="Cinque Terre" src="/image/thanos.jpeg">
-                        <div id="img-option">
+                    <div id="user-image">
+                        <p>Chưa có ảnh đại diện</p>
+                        <form action='/uploadImage' method='post' enctype="multipart/form-data">
+                            <input type="file" name='file'/>
+                            <button type="submit" class="btn btn-primary">Upload ảnh</button>
+                        </form>
+                        <!-- <div id="img-option">
                             <button type="button" class="btn" id="update-img">Cập nhật ảnh</button>
                             <button type="button" class="btn" id="del-img">Xóa ảnh</button>
-                        </div>
+                        </div> -->
                     </div>
                 </span>
                 <br>

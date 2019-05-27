@@ -46,6 +46,12 @@ table#login tbody tr th {
 .input-box {
     padding-left: 5px;
 }
+label[for="username-input"] {
+    margin: 0;
+}
+label[for="password-input"] {
+    margin: 0;
+}
 #forgot-password {
     display: block;
 }
@@ -53,26 +59,29 @@ table#login tbody tr th {
     padding: 0 3px;
 }
 #slogan {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     text-align: center;
 }
-#search-bar {
-    min-width: 300px;
-    font-size: 17px;
-    width: 50%;
-    height: 30px;
-    background-color: rgb(158, 219, 97);
-    position: relative;
-    left: 25%;
-    z-index: 1;
+span.select {
+    display: inline-block;
+    margin: 0 60px;
+    cursor: pointer;
 }
-#home {
-    background-image: url('../image/background1.jpg')
+span.select:hover {
+    opacity: 0.8;
+}
+span.select a img {
+    width: 150px;
+    height: 150px;
 }
 /*  */
 .create-object {
     float: right;
 }
-.component-option {
+#user-image {
+    border: 5px solid rgb(0, 134, 0);
+    border-radius: 5px;
+    padding: 10px;
     float: right;
 }
 .employee-option {

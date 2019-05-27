@@ -9,36 +9,40 @@
 </head>
 
 <body>
-    <div id="surface home">
+    <div id="surface">
         <% include partials/head.ejs %>
         <div class="slider-container">
             <div class="container clear-fix">
-                <ul id="main-content">
+                <div id="main-content">
                     <br>
                     <div>
-                        <h1 id="slogan">Trang thông tin giảng viên</h1>
+                        <h1 id="slogan">TRANG THÔNG TIN GIẢNG VIÊN</h1>
                     </div>
                     <br>
-                    <nav class="navbar navbar-expand-sm bg-light">
-                        <ul class="navbar-nav">
-                            <% if (role === "admin") { %>
-                            <li class="nav-item">
-                                <a class="nav-link" href="unit">Đơn vị</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="field_research">Lĩnh vực nghiên cứu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="employee">Giảng viên</a>
-                            </li>
-                            <% } else { %>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Tìm kiếm</a>
-                            </li>
-                            <% } %>
-                        </ul>
-                    </nav>
-                </ul>
+                    <% if (role === "admin") { %>
+                    <br>
+                    <div>
+                        <span class="select">
+                            <a href="unit"><img src="/image/college.png"></a>
+                        </span>
+                        <span class="select rounded-lg">
+                            <a href="field_research"><img src="/image/open-book.png"></a>
+                        </span>
+                        <span class="select rounded-lg">
+                            <a href="employee"><img src="/image/lecture.png"></a>
+                        </span>
+                        <span class="select rounded-lg">
+                            <a href=""><img src="/image/search.png"></a>
+                        </span>
+                    </div>
+                    <br>
+                    <br>
+                    <% } else { %>
+                    <button class="btn btn-warning" style="margin: auto; display: block;">Tìm kiếm</button>
+                    <br>
+                    <br>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>

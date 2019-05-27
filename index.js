@@ -3,7 +3,10 @@ const express = require("express");
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require("body-parser");
-const { parse } = require("querystring");
+const {
+  parse
+} = require("querystring");
+const multer = require('multer');
 
 const app = express();
 
@@ -11,7 +14,9 @@ app.use(express.static(__dirname + '/public'));
 
 const mainRoute = require('./routes/router');
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 // Config session
@@ -20,7 +25,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 1000 * 60 * 5 
+    maxAge: 1000 * 60 * 5
   }
 }));
 
@@ -37,7 +42,8 @@ app.set("views", "./views");
 // Routing
 app.use('/', mainRoute);
 
+
 // listen port
-app.listen(8012,()=>{
+app.listen(8012, () => {
   console.log('Server running on port 8012');
 });

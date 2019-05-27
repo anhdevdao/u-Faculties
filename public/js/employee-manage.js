@@ -1,5 +1,6 @@
-function Edit(e) {
-    
+function addByExcel() {
+    var input = document.getElementById('input-excel').value;
+    console.log(input);
 }
 
 function Delete(e) {

@@ -47,7 +47,12 @@
                                         <input id="type" class="input-box" name="employeeType" required/>
                                         <br>
                                         <label class="create-label" for="deg">Học vị: </label>
-                                        <input id="deg" class="input-box" name="degree"/>
+                                        <select class="input-box" id="deg" name="degree">
+                                            <option value="TS">TS</option>
+                                            <option value="ThS">ThS</option>
+                                            <option value="GS">GS</option>
+                                            <option value="PGS. TS">GS</option>
+                                        </select>
                                         <br>
                                         <label class="create-label" for="unit">Nơi công tác: </label>
                                         <input id="unit" class="input-box" name="company" required/>
@@ -67,9 +72,9 @@
                                     <h1 style="text-align:center">Thêm Giảng viên từ Excel</h1>
                                     <br>
                                 </div>
-                                <div class="sub-container">
+                                <div class="sub-container" class="custom-file">
                                     Chọn file: <input id="input-excel" type="file" name="file" accept=".xlsx, .xls"><br><br>
-                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                    <button onclick="addByExcel()" class="btn btn-primary">Upload</button>
                                 </div>
                             </div>
                         </div> 
