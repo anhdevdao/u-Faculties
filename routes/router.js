@@ -98,8 +98,8 @@ router.route('/controllers/units-controller')
     .post(unitController.addUnit); 
 
 router.route('/unit-manage')
-    .post(unitController.delUnit);
-
+    .delete(unitController.delUnit)
+    .post(unitController.editUnit)
 
 // Profile page route
 router.route('/profile')
@@ -120,13 +120,6 @@ router.route('/profile')
 
 
 // Employee route
-router.route('/employee-manage')
-    .delete(employeeController.deleteEmployee)
-    .post(employeeController.editEmployee)
-
-router.route('/controllers/employee-controller')
-    .post(employeeController.addEmployee);
-
 router.route('/employee')
     .get(function (req, res) {
         if(req.isAuthenticated()) {
@@ -139,12 +132,19 @@ router.route('/employee')
         }
     })
 
-// router.route('/upload')
+router.route('/controllers/employee-controller')
+    .post(employeeController.addEmployee);
+
+router.route('/employee-manage')
+    .delete(employeeController.deleteEmployee)
+    .post(employeeController.editEmployee)
+
+// router.route('/employee-upload')
 //     .post(employeeController.addEmployeeByExcel)
 
 
 //============== upload image ================
-// Config storage
+// Config storage for image
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './public/image/user')
@@ -161,5 +161,58 @@ router.route('/uploadImage')
         console.log(req.file.originalname);
         res.redirect('/profile')
     })
+
+router.route('/uploadExcel')
+    .post(upload.single('file'), function(req, res) {
+        //console.log(req.file.originalname)
+        employeeController.addEmployeeByExcel(req.file.originalname)
+        res.redirect('/employee') 
+    })
 //============================================
+router.route('/search-unit/:id')
+.get(function(req, res){
+  const name = req.params.id;
+  connection.query('SELECT * FROM employee WHERE employeeId=?', name, (err,rows) => {
+    //console.log(rows);
+    //if (err) throw err;
+    if (rows.length > 0) {
+      res.send(rows);
+      //res.render("profile1.ejs", {degree: rows[0].degree, name: rows[0].name, employeeId: rows[0].employeeId, employeeType: rows[0].employeeType});
+    } else {
+      res.json(rows);
+    }
+   });
+});
+
+router.route('/search-unit1/:id')
+.get(function(req, res){
+  const name = req.params.id;
+  connection.query('SELECT * FROM employee WHERE company=?', name, (err,rows) => {
+    //console.log(rows);
+    //if (err) throw err;
+    if (rows.length > 0) {
+      res.send(rows);
+      //res.render("profile1.ejs", {degree: rows[0].degree, name: rows[0].name, employeeId: rows[0].employeeId, employeeType: rows[0].employeeType});
+    } else {
+      res.json(rows);
+    }
+   });
+});
+
+router.route('/search-unit')
+.get(function(req, res){
+  if(req.isAuthenticated()) {
+    connection.query('SELECT * FROM employee', function (err, result) {
+      if (err) throw err;
+      renderHTML('./views/search-unit.ejs', res, { unit: result, role: req.user[0].role, name: req.session.passport.user });
+    });
+  } else {
+    connection.query('SELECT * FROM employee', function (err, result) {
+        if (err) throw err;
+        renderHTML('./views/search-unit.ejs', res, { unit: result, role: "guest", name: "guest" });
+    });
+  }
+});
+
+
 module.exports = router;

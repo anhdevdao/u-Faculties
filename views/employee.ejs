@@ -28,9 +28,6 @@
                                 </div>
                                 <div class="sub-container">
                                     <form action='/controllers/employee-controller' method='POST'>
-                                        <label class="create-label" for="id">Mã cán bộ: </label>
-                                        <input id="id" class="input-box" name="employeeId" required/>
-                                        <br>
                                         <label class="create-label" for="name">Họ và tên: </label>
                                         <input id="name" class="input-box" name="name" required/>
                                         <br>
@@ -51,7 +48,7 @@
                                             <option value="TS">TS</option>
                                             <option value="ThS">ThS</option>
                                             <option value="GS">GS</option>
-                                            <option value="PGS. TS">GS</option>
+                                            <option value="PGS. TS">PGS. GS</option>
                                         </select>
                                         <br>
                                         <label class="create-label" for="unit">Nơi công tác: </label>
@@ -73,8 +70,10 @@
                                     <br>
                                 </div>
                                 <div class="sub-container" class="custom-file">
-                                    Chọn file: <input id="input-excel" type="file" name="file" accept=".xlsx, .xls"><br><br>
-                                    <button onclick="addByExcel()" class="btn btn-primary">Upload</button>
+                                    <form action='/uploadExcel' method='post' enctype="multipart/form-data">    
+                                        Chọn file: <input id="input-excel" type="file" name="file" accept=".xlsx, .xls"><br><br>
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </form>
                                 </div>
                             </div>
                         </div> 
@@ -128,19 +127,19 @@
                             </tr>
                         </thead>
                         <tbody id="myTable">
-                            <% for(var i = 0; i < employee.length; i++) { %>
+                            <% for(var i = 0; i < employee.length; i++) { var emplID = employee[i].employeeId;  %>
                                 <tr>
-                                    <td><%= employee[i].employeeId %></td>
-                                    <td><%= employee[i].name %></td>
-                                    <td><%= employee[i].username %></td>
-                                    <td><%= employee[i].email %></td>
-                                    <td><%= employee[i].employeeType%></td>
-                                    <td><%= employee[i].degree %></td>
-                                    <td><%= employee[i].company %></td>
+                                    <td id="id-<%= emplID %>"><%= employee[i].employeeId %></td>
+                                    <td id="name-<%= emplID %>"><%= employee[i].name %></td>
+                                    <td id="username-<%= emplID %>"><%= employee[i].username %></td>
+                                    <td id="mail-<%= emplID %>"><%= employee[i].email %></td>
+                                    <td id="type-<%= emplID %>"><%= employee[i].employeeType%></td>
+                                    <td id="deg-<%= emplID %>"><%= employee[i].degree %></td>
+                                    <td id="company-<%= emplID %>"><%= employee[i].company %></td>
                                     <% if (role === "admin") { %>
                                     <td class="interactive">
                                         <div>
-                                            <button onclick="document.getElementById('edit-wrapper').style.display = 'block'" class="btn btn-primary table-edit">Sửa</button>
+                                            <button id="edit-<%= emplID %>" onclick="Edit(this)" class="btn btn-primary table-edit">Sửa</button>
                                             <div id="edit-wrapper" class="modal">
                                                 <div class="modal-content animate">      
                                                     <div>
@@ -149,36 +148,7 @@
                                                         <h2 style="text-align:center">Chỉnh sửa thông tin Giảng viên</h2>
                                                         <br>
                                                     </div>
-                                                    <div class="sub-container">
-                                                        <form action='/employee-manage' method='POST'>
-                                                            <label class="create-label" for="id">Mã cán bộ: </label>
-                                                            <input id="edit-id" class="input-box" name="id"/>
-                                                            <br>
-                                                            <label class="create-label" for="name">Họ và tên: </label>
-                                                            <input id="edit-name" class="input-box" name="edit-name"/>
-                                                            <br>
-                                                            <label class="create-label" for="acc">Tài khoản: </label>
-                                                            <input id="edit-acc" class="input-box" name="edit-username"/>
-                                                            <br>
-                                                            <label class="create-label" for="mail">VNU Email: </label>
-                                                            <input id="edit-mail" class="input-box" name="edit-email"/>
-                                                            <br>
-                                                            <label class="create-label" for="pwd">Mật khẩu: </label>
-                                                            <input id="edit-pwd" class="input-box" name="edit-password" type="password" required/>
-                                                            <br>
-                                                            <label class="create-label" for="type">Loại CB: </label>
-                                                            <input id="edit-type" class="input-box" name="edit-employeeType"/>
-                                                            <br>
-                                                            <label class="create-label" for="deg">Học vị: </label>
-                                                            <input id="edit-deg" class="input-box" name="edit-degree"/>
-                                                            <br>
-                                                            <label class="create-label" for="unit">Nơi công tác: </label>
-                                                            <input id="edit-unit" class="input-box" name="edit-company"/>
-                                                            <br>
-                                                            <br>
-                                                            <button id="edit" class="btn btn-primary">Lưu</button>
-                                                            <button onclick="document.getElementById('edit-wrapper').style.display='none'" class="btn btn-secondary">Hủy bỏ</button> 
-                                                        </form>
+                                                    <div id="edit-table" class="sub-container">
                                                     </div> 
                                                 </div>
                                             </div>

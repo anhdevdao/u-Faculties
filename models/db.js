@@ -1,6 +1,7 @@
 const connection = require('../config/database');
 const user = require('../models/user');
 
+//============== Model Unit =================
 exports.createUnit = function(unitName, unitType, address, phone, website, check) {
     connection.query("INSERT INTO units (name, unit_type, address, phone, website) VALUES ('"+unitName+"', '"+unitType+"', '"+address+"', '"+phone+"', '"+website+"')", function(err, result) {
         if (err) {
@@ -9,6 +10,8 @@ exports.createUnit = function(unitName, unitType, address, phone, website, check
         return check(null);
     })
 }
+
+// expo/
 
 exports.deleteUnit = function(id) {
     connection.query('SELECT * FROM units WHERE id = ?', id, function(err, rows) {
@@ -36,19 +39,58 @@ exports.getListUnit = function(cb) {
     })
 }
 
-exports.createEmployee = function(employeeId, name, username, email, password, employeeType, degree, company, check) {
-    connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType, degree, company) VALUES ('"+employeeId+"', '"+name+"', '"+username+"', '"+email+"', '"+employeeType+"', '"+degree+"', '"+company+"')", function(err, result) {
-        if (err) {
-            return check(err);
-        } else {
-            user.createUser(username, password, (err) => {
-                if (err) {
-                    return check(err);
-                }
-                return check(null);
-            })
-        }
-        //return check(null);
+exports.modifyUnit = function(unitID, unitName, unitType, address, phone, website, check) {
+    connection.query("UPDATE units SET name = '"+unitName+"', unit_type = '"+unitType+"', address = '"+address+"', phone = '"+phone+"', website = '"+website+"' WHERE id = "+unitID, function(err, result) {
+        if (err) return err;
+        return check(null);
+    })
+}
+//==============================================
+
+
+
+//============== Model Employee ================
+exports.createEmployee = function(name, username, email, password, employeeType, degree, company, check) {
+    user.createUser(username, password, (err) => {
+        if (err) return err;
+        connection.query('SELECT userId FROM account WHERE username = ?', username, function(err, result) {
+            if (err) return err;
+            if (result.length > 0) {
+                var employeeId = result[0].userId
+                // console.log(employee);
+                connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType, degree, company) VALUES ("+employeeId+", '"+name+"', '"+username+"', '"+email+"', '"+employeeType+"', '"+degree+"', '"+company+"')", (err) => {
+                    if (err) {
+                        return check(err)
+                    } 
+                    return check(null)
+                })
+            }
+        })
+    })
+}
+
+// =============== TO DO =======================
+exports.createEmployeeByExcel = function(username, password, name, email, check) {
+    user.createUser(username, password, (err) => {
+        // console.log(username);
+        // console.log(password);
+        // console.log(name);
+        // console.log(email);
+        if (err) return err;
+        return check(null)
+        // connection.query('SELECT userId FROM account WHERE username = ?', username, function(err, result) {
+        //     if (err) return err;
+        //     if (result.length > 0) {
+        //         console.log(result[0].userId);
+        //         var id = result[0].userId
+        //         connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType) VALUES ("+id+", '"+name+"', '"+username+"', '"+email+"', 'Giảng viên')", (err) => {
+        //             if (err) {
+        //                 return check(err)
+        //             }
+        //             return check(null)
+        //         })
+        //     }
+        // })
     })
 }
 
@@ -69,3 +111,21 @@ exports.deleteEmployee = function(username) {
         }
     })
 }
+
+exports.modifyEmployee = function(id, name, username, mail, password, type, degree, company, check) {
+    connection.query("UPDATE employee SET name = '"+name+"', username = '"+username+"', email = '"+mail+"', employeeType = '"+type+"', degree = '"+degree+"', company = '"+company+"' WHERE employeeId = "+id, function(err, result) {
+        console.log("ahihihi");
+        if (err) { 
+            return err;
+        } else {
+            user.modifyUser(id, username, password, (err) => {
+                if (err) {
+                    return check(err);
+                } else {
+                    return check(null);
+                }
+            })
+        }
+    })
+}
+//==============================================

@@ -1,24 +1,30 @@
 const db = require('../models/db');
-const multer = require('multer');
+const xlsx = require('xlsx');
 
 module.exports.addEmployee = function(req, res) {
-    db.createEmployee(req.body.employeeId, req.body.name, req.body.username, req.body.email, req.body.password, req.body.employeeType, req.body.degree, req.body.company, (err) => {
+    db.createEmployee(req.body.name, req.body.username, req.body.email, req.body.password, req.body.employeeType, req.body.degree, req.body.company, (err) => {
         if (err) {
             res.json({
                 status: false,
                 message: 'Creating failed'
             })
-        }
-        return res.redirect('/employee');
+        } 
+        return res.redirect('/employee')
     })
 }
 
-// module.exports.addEmployeeByExcel = function(req, res) {
-//     var excel = xlsx.readFile(req.body.file)
-//     var ws = excel.Sheets;
-//     var data = xlsx.utils.sheet_to_json(ws)
-//     console.log(data);
-// }
+module.exports.addEmployeeByExcel = function(file) {
+    var excel = xlsx.readFile('./public/image/user/'+file)
+    var ws = excel.Sheets["Sheet1"];
+    var data = xlsx.utils.sheet_to_json(ws);
+    for (var i = 0; i < data.length; i++) {
+        db.createEmployeeByExcel(data[i]["Tên đăng nhập"], data[i]["Mật khẩu"], data[i]["Họ và tên"], data[i]["VNU email"], (err) => {
+            if (err) {
+                return err;
+            }
+        })
+    }
+}
 
 module.exports.deleteEmployee = function(req, res) {
     console.log(req.body.username);
@@ -29,11 +35,12 @@ module.exports.deleteEmployee = function(req, res) {
 }
 
 module.exports.editEmployee = function(req, res) {
-    // db.modifyEmployee(req.body.id, req.body.edit-name, req.body.edit-username, req.body.edit-email, req.body.edit-password, req.body.edit-employeeType, req.body.edit-degree, edit-company, (err) => {
-
-    // })
-}
-
-module.exports.uploadImage = function(req, res) {
-    
+    db.modifyEmployee(req.body.id, req.body.name, req.body.username, req.body.mail, req.body.password, req.body.type, req.body.degree, req.body.company, (err) => {
+        if (err) {
+            res.json({
+                status: false,
+                message: 'Creating failed'
+            })
+        }
+    })
 }

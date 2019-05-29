@@ -18,7 +18,6 @@
                     <% if (role === "admin") { %>
                     <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" type="button" class="btn btn-primary create-object">Thêm mới</button>
                     <div id="modal-wrapper" class="modal">
-  
                         <div class="modal-content animate">
                           <div>
                             <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
@@ -84,16 +83,28 @@
                         <tbody id="myTable">
                             <% for(var i=0; i < units.length; i++) { %>
                                 <tr>
-                                    <td><%= units[i].name %></td>
-                                    <td><%= units[i].unit_type %></td>
-                                    <td><%= units[i].address %></td>
-                                    <td><%= units[i].phone %></td>
-                                    <td><a href="<%= units[i].website %>"><%= units[i].website %></a></td>
+                                    <td id="name-<%= units[i].id %>"><%= units[i].name %></td>
+                                    <td id="type-<%= units[i].id %>"><%= units[i].unit_type %></td>
+                                    <td id="addr-<%= units[i].id %>"><%= units[i].address %></td>
+                                    <td id="phone-<%= units[i].id %>"><%= units[i].phone %></td>
+                                    <td><a href="<%= units[i].website %>" id="link-<%= units[i].id %>"><%= units[i].website %></a></td>
                                     <% if (role === "admin") { %>
                                         <td class="interactive">
                                             <div>
-                                                <button class="btn btn-primary table-edit">Sửa</button>
-                                                <button onclick="Delete(this)" id="<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
+                                                <button onclick="Edit(this)" id="edit-<%= units[i].id %>" class="btn btn-primary table-edit">Sửa</button>
+                                                <div id="edit-wrapper" class="modal">
+                                                    <div class="modal-content animate">
+                                                        <div>
+                                                        <span onclick="document.getElementById('edit-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                                        <br>
+                                                        <h1 style="text-align:center">Sửa thông tin Đơn vị</h1>
+                                                        <br>
+                                                        </div>
+                                                        <div id="edit-table" class="sub-container">
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                                <button onclick="Delete(this)" id="delete-<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
                                             </div>
                                         </td>
                                     <% } else {} %>
