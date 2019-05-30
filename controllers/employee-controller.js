@@ -4,9 +4,8 @@ const xlsx = require('xlsx');
 module.exports.addEmployee = function(req, res) {
     db.createEmployee(req.body.name, req.body.username, req.body.email, req.body.password, req.body.employeeType, req.body.degree, req.body.company, (err) => {
         if (err) {
-            res.json({
-                status: false,
-                message: 'Creating failed'
+            res.send({
+                message: 'User exits'
             })
         } 
         return res.redirect('/employee')

@@ -58,7 +58,9 @@ router.route('/field_research')
     .get((req, res) => {
         if (req.isAuthenticated()) {
             if (req.user[0].role === "admin") {
-                res.render("field_research", { name: req.session.passport.user, role: req.user[0].role })
+                connection.query('SELECT * FROM field ORDER BY parent_id', function (err, result) {
+                    res.render("field_research", { field: result, name: req.session.passport.user, role: req.user[0].role })
+                })
             } else {
                 res.redirect('/')
             } 
@@ -124,7 +126,6 @@ router.route('/employee')
     .get(function (req, res) {
         if(req.isAuthenticated()) {
             connection.query('SELECT * FROM employee', function (err, result) {
-                if (err) throw err;
                 renderHTML('./views/employee.ejs', res, { employee: result, name: req.session.passport.user, role: req.user[0].role });
             });
         } else {

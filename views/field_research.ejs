@@ -4,6 +4,7 @@
         <title>Lĩnh vực nghiên cứu</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/dist/themes/default/style.min.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
     <body>
@@ -23,7 +24,43 @@
                         </div>
                         <button type="button" class="btn btn-primary">Thêm</button>
                     </div>
-                    <ul class="tree">
+                    <div id="jstree_demo_div">
+                        <ul>
+                        <% var findChild = function(field, parent) { %>
+                            <% if(field[parent].hasChild == 1) { %>
+                            <ul>
+                                <% for (var j = parent; j < field.length; j++) { %>
+                                    <% if(field[j].parent_id == field[parent].id) { %>
+                                        <li><%= field[j].name %>
+                                        <% findChild(field, j); %>
+                                        </li>
+                                    <% } %>
+                                <% } %>
+                            </ul>
+                            <% } %>
+                        <% } %>
+                        <% for (var i = 0; i < field.length; i++) { %>
+                            <% if (field[i].parent_id == 0) { %>
+                                <li id="root-<%= field[i].id %>"><%= field[i].name %>
+                                <% findChild(field, i); %>
+                                </li>
+                            <% } %>
+                        <% } %>
+                        </ul>
+                        <!--
+                            <li>Root node 1
+                            <ul>
+                                <li id="child_node_1">Child node 1</li>
+                                <li>Child node 2</li>
+                            </ul>
+                            </li>
+                            <li>Root node 2</li>
+                        </ul>
+                        </div>
+                        <button>demo button</button>
+                        -->
+                    </div>
+                    <!-- <ul class="tree">
                         <li class="has-children">
                             <img src="/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
                             <a href="">ACM Computing Classification System</a>
@@ -95,11 +132,38 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <% include partials/foot.ejs %>
-        <script type="text/javascript" src="/js/tree.js"></script>
+        <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="/dist/jstree.min.js"></script>
+        <script>
+            $(function () { 
+                $('#jstree_demo_div').jstree(); 
+
+                $('#jstree_demo_div').on("changed.jstree", function (e, data) {
+                    console.log(data.selected);
+                });
+
+                $('button').on('click', function () {
+                    $('#jstree_demo_div').jstree(true).select_node('child_node_1');
+                    $('#jstree_demo_div').jstree('select_node', 'child_node_1');
+                    $.jstree.reference('#jstree_demo_div').select_node('child_node_1');
+                });
+            });
+        </script>
     </body>
 </html>

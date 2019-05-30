@@ -52,15 +52,20 @@ exports.modifyUnit = function(unitID, unitName, unitType, address, phone, websit
 //============== Model Employee ================
 exports.createEmployee = function(name, username, email, password, employeeType, degree, company, check) {
     user.createUser(username, password, (err) => {
-        if (err) return err;
+        if (err) return check(err);
         connection.query('SELECT userId FROM account WHERE username = ?', username, function(err, result) {
             if (err) return err;
             if (result.length > 0) {
                 var employeeId = result[0].userId
                 // console.log(employee);
-                connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType, degree, company) VALUES ("+employeeId+", '"+name+"', '"+username+"', '"+email+"', '"+employeeType+"', '"+degree+"', '"+company+"')", (err) => {
+                connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType, degree, company) VALUES ("+employeeId+", '"+name+"', '"+username+"', '"+email+"', '"+employeeType+"', '"+degree+"', '"+company+"')", function(err, result) {
+                    console.log(result)
                     if (err) {
-                        return check(err)
+                        // console.log(err)
+                        if (err.code === "ER_DUP_FIELDNAME") {
+                            return check(err)
+                        }
+                        // return check(err, mess)
                     } 
                     return check(null)
                 })
@@ -69,7 +74,6 @@ exports.createEmployee = function(name, username, email, password, employeeType,
     })
 }
 
-// =============== TO DO =======================
 exports.createEmployeeByExcel = function(username, password, name, email, check) {
     user.createUser(username, password, (err) => {
         if (err) return err;
