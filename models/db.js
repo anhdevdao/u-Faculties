@@ -72,25 +72,19 @@ exports.createEmployee = function(name, username, email, password, employeeType,
 // =============== TO DO =======================
 exports.createEmployeeByExcel = function(username, password, name, email, check) {
     user.createUser(username, password, (err) => {
-        // console.log(username);
-        // console.log(password);
-        // console.log(name);
-        // console.log(email);
         if (err) return err;
-        return check(null)
-        // connection.query('SELECT userId FROM account WHERE username = ?', username, function(err, result) {
-        //     if (err) return err;
-        //     if (result.length > 0) {
-        //         console.log(result[0].userId);
-        //         var id = result[0].userId
-        //         connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType) VALUES ("+id+", '"+name+"', '"+username+"', '"+email+"', 'Giảng viên')", (err) => {
-        //             if (err) {
-        //                 return check(err)
-        //             }
-        //             return check(null)
-        //         })
-        //     }
-        // })
+        connection.query('SELECT userId FROM account WHERE username = ?', username, function(err, result) {
+            if (err) return err;
+            if (result.length > 0) {
+                var id = result[0].userId
+                connection.query("INSERT INTO employee (employeeId, name, username, email) VALUES ("+id+", '"+name+"', '"+username+"', '"+email+"')", (err) => {
+                    if (err) {
+                        return check(err)
+                    }
+                    return check(null)
+                })
+            }
+        })
     })
 }
 

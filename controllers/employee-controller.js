@@ -18,10 +18,10 @@ module.exports.addEmployeeByExcel = function(file) {
     var ws = excel.Sheets["Sheet1"];
     var data = xlsx.utils.sheet_to_json(ws);
     for (var i = 0; i < data.length; i++) {
-        db.createEmployeeByExcel(data[i]["Tên đăng nhập"], data[i]["Mật khẩu"], data[i]["Họ và tên"], data[i]["VNU email"], (err) => {
+        db.createEmployeeByExcel(data[i]["Tên đăng nhập"], data[i]["Mật khẩu"].toString(), data[i]["Họ và tên"], data[i]["VNU email"], (err) => {
             if (err) {
-                return err;
-            }
+                console.log(err)
+            } 
         })
     }
 }

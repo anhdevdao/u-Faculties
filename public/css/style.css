@@ -154,10 +154,9 @@ label {
     right: 0px;
 }
 #field-list1 {
-    padding: 20 20px;
     margin-top: -17px;
+    margin-right: 60px;
     border: 2px solid black;
-    width: 298px;
 }
 /* Pop up Form */
 .modal {
@@ -226,12 +225,10 @@ thead tr {
 
 /* SEARCH PAGE */
 #table-unit {
-    position:absolute;
-      width:620px;
-      height:75px;
-  
-      top: 23%;
-      left:38%;
+    position: absolute;
+    width: 700px;
+    top: 30%;
+    left: 40%;
   }
 .tab-wrapper{
     width: 400px;
@@ -263,10 +260,6 @@ ul[class="hoho"] li a {
 }
 .tab-wrapper ul.hoho li{
     margin-left: -80px;
-}
-.tab-content{
-    padding: 5px;
-    /* margin: 0 0 0 75px; */
 }
 .tab-item {
     display: none;

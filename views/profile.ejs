@@ -12,7 +12,12 @@
             <div class="container">
                 <br>
                 <div style="display: inline-block">
+                    <% if (user[0].degree) { %>
                     <h1 style="font-weight: 800;"><%= user[0].degree %>. <%= user[0].name %></h1>
+                    <% } else { %> 
+                    <h1 style="font-weight: 800;"><%= user[0].name %></h1>
+                    <% } %>
+
                 </div>
                 <span>
                     <div id="user-image">

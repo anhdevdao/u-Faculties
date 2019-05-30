@@ -164,9 +164,8 @@ router.route('/uploadImage')
 
 router.route('/uploadExcel')
     .post(upload.single('file'), function(req, res) {
-        //console.log(req.file.originalname)
         employeeController.addEmployeeByExcel(req.file.originalname)
-        res.redirect('/employee') 
+        res.redirect('/employee')
     })
 //============================================
 router.route('/search-unit/:id')

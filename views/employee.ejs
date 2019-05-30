@@ -41,7 +41,7 @@
                                         <input id="pwd" class="input-box" name="password" type="password" required/>
                                         <br>
                                         <label class="create-label" for="type">Loại CB: </label>
-                                        <input id="type" class="input-box" name="employeeType" required/>
+                                        <input id="type" class="input-box" name="employeeType"/>
                                         <br>
                                         <label class="create-label" for="deg">Học vị: </label>
                                         <select class="input-box" id="deg" name="degree">
@@ -52,7 +52,7 @@
                                         </select>
                                         <br>
                                         <label class="create-label" for="unit">Nơi công tác: </label>
-                                        <input id="unit" class="input-box" name="company" required/>
+                                        <input id="unit" class="input-box" name="company"/>
                                         <br>
                                         <br>
                                         <button id="addEmpl" class="btn btn-primary">Thêm</button>
@@ -138,7 +138,7 @@
                                     <td id="company-<%= emplID %>"><%= employee[i].company %></td>
                                     <% if (role === "admin") { %>
                                     <td class="interactive">
-                                        <div>
+                                        <div id="interactive-option">
                                             <button id="edit-<%= emplID %>" onclick="Edit(this)" class="btn btn-primary table-edit">Sửa</button>
                                             <div id="edit-wrapper" class="modal">
                                                 <div class="modal-content animate">      
@@ -152,7 +152,8 @@
                                                     </div> 
                                                 </div>
                                             </div>
-                                            <button onclick="Delete(this)" id="delete-<%= employee[i].username %>" class="btn btn-secondary table-edit">Xóa</button>
+                                            <button id="delete-<%= employee[i].username %>" onclick="confirmDelete(this)" class="btn btn-secondary table-edit">Xóa</button>
+                                            <div id="delete-wrapper" class="modal"></div>
                                         </div>
                                     </td>
                                     <% } else {} %>

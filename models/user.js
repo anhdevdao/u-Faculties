@@ -7,7 +7,7 @@ module.exports.createUser = function(username, password, check) {
             var users = {
                 "username": username,
                 "password": hash,
-                "role": 'teacher',
+                "role": 'teacher'
             };
             var insert = 'INSERT INTO account SET ?';
             connection.query(insert, users, function(err, result) {
