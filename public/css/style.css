@@ -4,6 +4,9 @@ body {
 a, a:hover {
     text-decoration: none;
 }
+#myTable tr:hover {
+    background-color: #EAEBEE;
+}
 input {
     border-radius: 3px;
     border: none;
@@ -123,6 +126,7 @@ span.select a img {
     display: inline;
     margin-right: 30px;
 }
+
 label {
     font-weight: bold; 
 }
@@ -151,13 +155,14 @@ label {
     min-height: 300px;
     padding: 0 20px;
     border: 1px solid grey;
+    border-radius: 5px;
 }
 #field-list-name {
     margin-right: 10px;
 }
 #field-search {
     float: right;
-    border: 1px solid gray;
+    border: 2px solid gray;
     border-radius: 4px;
     padding-left: 3px;
 }
@@ -212,8 +217,16 @@ label {
     margin: auto;
     display: block;
 }
+.sub-container button[onclick='Save(this)'] {
+    margin: auto;
+    display: block;
+}
 .sub-container input {
     width: 50%;
+}
+.sub-container button[id='save-tree'] {
+    margin: auto;
+    display: block;
 }
 thead tr {
     background-color: #9BCA3B;
@@ -225,7 +238,9 @@ thead tr {
 .interactive {
     text-align: center;
 }
-
+.interactive-option > button {
+    padding: 0 3px;
+}
 
 /* SEARCH PAGE */
 #table-unit {
@@ -245,8 +260,13 @@ thead tr {
 }
 .tab-wrapper ul.tab li {
     display: inline-block;
-    border: 2px solid;
+    border: 2px solid gray;
     margin: 0 10px 0 0;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.tab-wrapper ul.tab li:hover {
+    background-color: #9BCA3B;
 }
 .tab-wrapper ul li.active{
     background: #9BCA3B;
@@ -258,17 +278,12 @@ thead tr {
     color: #000;
     padding: 0 10px;
 }
-/* ul[class="hoho"] li a {
-    margin-left: 80px;
-}
-.tab-wrapper ul.hoho li{
-    margin-left: -80px;
-} */
 .tab-item {
     display: none;
     margin: 0;
 }
 .list {
-    border: 2px solid;
+    border: 2px solid gray;
+    padding: 5px 10px;
 }
   

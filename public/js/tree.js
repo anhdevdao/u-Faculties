@@ -3,64 +3,56 @@ $(document).ready(function(){
 	// Config tree
 	$.jstree.defaults.core.themes.variant = "large";
 	$('#jstree').jstree({
-	'plugins' : ['state', 'contextmenu', 'search'],
-	"core": {
-		"data": {
-			"url": "field",
-			"type": "get",
-			"dataType": "json",
-			'data' : (node) => {
-				return { 'id' : node.id };
-			},
-			success: (data) => {
-				maxID = data[0].id;
-				for (var i = 1; i < data.length; i++)
-					if (data[i].id > maxID)
-						maxID = data[i].id;
-			}
-		},
-		"check_callback" : true
-		// "check_callback" : (operation, node, parent, position, more) => {
-		//     if(operation === "delete_node") {
-		//         if(parent.id === "#" && node.id === 1) {
-		//             return false; 
-		//         }
-		//     }
-		//     return true;
-		// }
-	},
-	"contextmenu": {
-		"items": ($node) => {
-			var tree = $("#jstree").jstree(true);
-			return {
-				"create": {
-					"separator_before": false,
-					"separator_after": true,
-					"label": "Thêm",
-					"action": (obj) => {
-						$node = tree.create_node($node);
-						tree.edit($node);
-					}
+		'plugins' : ['state', 'contextmenu', 'search'],
+		"core": {
+			"data": {
+				"url": "field",
+				"type": "get",
+				"dataType": "json",
+				'data' : (node) => {
+					return { 'id' : node.id };
 				},
-				"rename": {
-					"separator_before": false,
-					"separator_after": false,
-					"label": "Sửa",
-					"action": (obj) => {
-						tree.edit($node);
-					}
-				},
-				"delete": {
-					"separator_before": false,
-					"separator_after": false,
-					"label": "Xóa",
-					"action": (obj) => {
-						tree.delete_node($node);
-					}
+				success: (data) => {
+					maxID = data[0].id;
+					for (var i = 1; i < data.length; i++)
+						if (data[i].id > maxID)
+							maxID = data[i].id;
 				}
-			};
+			},
+			"check_callback" : true
+		},
+		"contextmenu": {
+			"items": ($node) => {
+				var tree = $("#jstree").jstree(true);
+				return {
+					"create": {
+						"separator_before": false,
+						"separator_after": true,
+						"label": "Thêm",
+						"action": () => {
+							$node = tree.create_node($node);
+							tree.edit($node);
+						}
+					},
+					"rename": {
+						"separator_before": false,
+						"separator_after": false,
+						"label": "Sửa",
+						"action": () => {
+							tree.edit($node);
+						}
+					},
+					"delete": {
+						"separator_before": false,
+						"separator_after": false,
+						"label": "Xóa",
+						"action": () => {
+							tree.delete_node($node);
+						}
+					}
+				};
+			}
 		}
-	}
 	}).on('create_node.jstree', (e, data) => {
 		maxID++;
 		data.instance.set_id(data.node, maxID);

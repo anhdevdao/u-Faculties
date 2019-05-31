@@ -90,7 +90,7 @@
                                     <td><a href="<%= units[i].website %>" id="link-<%= units[i].id %>"><%= units[i].website %></a></td>
                                     <% if (role === "admin") { %>
                                         <td class="interactive">
-                                            <div>
+                                            <div class="interactive-option">
                                                 <button onclick="Edit(this)" id="edit-<%= units[i].id %>" class="btn btn-primary table-edit">Sửa</button>
                                                 <div id="edit-wrapper" class="modal">
                                                     <div class="modal-content animate">
@@ -104,7 +104,8 @@
                                                         </div> 
                                                     </div>
                                                 </div>
-                                                <button onclick="Delete(this)" id="delete-<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
+                                                <button onclick="confirmDelete(this)" id="delete-<%= units[i].id %>" class="btn btn-secondary table-edit">Xóa</button>
+                                                <div id="delete-wrapper" class="modal"></div>
                                             </div>
                                         </td>
                                     <% } else {} %>

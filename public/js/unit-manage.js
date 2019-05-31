@@ -69,7 +69,9 @@ function Delete(e) {
     let strID = e.id;
     let n = strID.indexOf("-");
     let unitID = strID.substring(n+1, strID.length);
-    $('#'+strID).closest('tr').remove();
+    let id = "delete-"+unitID;
+    $('#'+id).closest('tr').remove();
+    closeModal()   
     $.ajax({
         method: "delete",
         datatype: "json",
@@ -82,4 +84,25 @@ function Delete(e) {
             console.log(data);
         }
     })
+}
+
+function closeModal() {
+    document.getElementById("delete-wrapper").style.display="none"
+}
+
+function confirmDelete(e) {
+    document.getElementById('delete-wrapper').innerHTML='<div class="modal-content animate">'+    
+        '<div>'+
+            '<span onclick="closeModal()" class="close" title="Close PopUp">&times;</span>'+
+            '<br>'+
+            '<h2 style="text-align:center">Bạn có chắc chắn xóa không?</h2>'+
+            '<br>'+
+        '</div>'+
+        '<div class="sub-container">'+
+            '<button onclick="Delete(this)" id="confirm'+e.id+'" class="btn btn-danger" style="margin-right: 10px;">Có</button>'+
+            '<button onclick="closeModal()" class="btn btn-secondary">Không</button>'+
+        '</div>'+
+    '</div>'+
+    '</div>'
+    document.getElementById('delete-wrapper').style.display = 'block'
 }

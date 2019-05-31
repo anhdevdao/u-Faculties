@@ -24,8 +24,7 @@ function Edit(e) {
     '<input id="edit-deg" class="input-box" name="edit-degree" value="'+deg+'" required/><br>'+
     '<label class="create-label" for="edit-company">Nơi công tác: </label>'+
     '<input id="edit-company" class="input-box" name="edit-company" value="'+company+'" required/><br><br>'+
-    '<button onclick="Save(this)" id="save-'+userId+'" class="btn btn-success" style="margin-right: 10px;">Lưu</button>'+
-    '<button class="btn btn-secondary">Hủy bỏ</button>'
+    '<button onclick="Save(this)" id="save-'+userId+'" class="btn btn-success">Lưu</button>'
 }
 
 function Save(e) {

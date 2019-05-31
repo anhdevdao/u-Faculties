@@ -43,3 +43,9 @@ module.exports.editEmployee = function(req, res) {
         }
     })
 }
+
+module.exports.editProfile = function(req, res) {
+    db.modifyProfile(req.body.id, req.body.type, req.body.company, req.body.degree, req.body.mail, req.body.website, (err) => {
+        if (err) console.log(err)
+    })
+}

@@ -59,7 +59,6 @@ exports.createEmployee = function(name, username, email, password, employeeType,
                 var employeeId = result[0].userId
                 // console.log(employee);
                 connection.query("INSERT INTO employee (employeeId, name, username, email, employeeType, degree, company) VALUES ("+employeeId+", '"+name+"', '"+username+"', '"+email+"', '"+employeeType+"', '"+degree+"', '"+company+"')", function(err, result) {
-                    console.log(result)
                     if (err) {
                         // console.log(err)
                         if (err.code === "ER_DUP_FIELDNAME") {
@@ -112,7 +111,6 @@ exports.deleteEmployee = function(username) {
 
 exports.modifyEmployee = function(id, name, username, mail, password, type, degree, company, check) {
     connection.query("UPDATE employee SET name = '"+name+"', username = '"+username+"', email = '"+mail+"', employeeType = '"+type+"', degree = '"+degree+"', company = '"+company+"' WHERE employeeId = "+id, function(err, result) {
-        console.log("ahihihi");
         if (err) { 
             return err;
         } else {
@@ -127,3 +125,8 @@ exports.modifyEmployee = function(id, name, username, mail, password, type, degr
     })
 }
 //==============================================
+exports.modifyProfile = function(id, type, company, degree,  mail, website) {
+    connection.query("UPDATE employee SET email = '"+mail+"', employeeType = '"+type+"', degree = '"+degree+"', company = '"+company+"', website = '"+website+"' WHERE employeeId = "+id, function(err, result) {
+        if (err) console.log(err); 
+    })
+}

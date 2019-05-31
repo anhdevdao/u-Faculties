@@ -48,7 +48,7 @@
                                             <option value="TS">TS</option>
                                             <option value="ThS">ThS</option>
                                             <option value="GS">GS</option>
-                                            <option value="PGS. TS">PGS. GS</option>
+                                            <option value="PGS. TS">PGS. TS</option>
                                         </select>
                                         <br>
                                         <label class="create-label" for="unit">Nơi công tác: </label>
@@ -138,7 +138,7 @@
                                     <td id="company-<%= emplID %>"><%= employee[i].company %></td>
                                     <% if (role === "admin") { %>
                                     <td class="interactive">
-                                        <div id="interactive-option">
+                                        <div class="interactive-option">
                                             <button id="edit-<%= emplID %>" onclick="Edit(this)" class="btn btn-primary table-edit">Sửa</button>
                                             <div id="edit-wrapper" class="modal">
                                                 <div class="modal-content animate">      

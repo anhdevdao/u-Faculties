@@ -63,15 +63,13 @@ router.route('/field_research')
             res.redirect('/')
         }
     })
-
+ 
 router.route('/field')
     .get((req, res) => {
-        if (req.isAuthenticated() && req.user[0].role === "admin") {
-            connection.query("SELECT * FROM field", function(err, result) {
-                if(err) throw err;
-                res.send(result)
-            });
-        };
+        connection.query("SELECT * FROM field", function(err, result) {
+            if(err) throw err;
+            res.send(result)
+        });
     });
 
 router.route('/researchCreate') 
@@ -141,7 +139,8 @@ router.route('/unit-manage')
     .delete(unitController.delUnit)
     .post(unitController.editUnit)
 
-// Profile page route
+
+// ================ Profile page route =================
 router.route('/profile')
     .get((req, res) => {
         if (req.isAuthenticated()) {
@@ -149,8 +148,13 @@ router.route('/profile')
                 res.redirect('/index');
             } else {
                 connection.query('SELECT * FROM employee WHERE username = ?', req.session.passport.user, function (err, result) {
-                    if (err) throw err;
-                    renderHTML('./views/profile.ejs', res, { user: result, name: req.session.passport.user, role: req.user[0].role });
+                    if (err) throw err
+                    connection.query('SELECT DISTINCT f.text fieldname FROM employee e , field f , fieldEmploy b WHERE  b.employeeId = (select employeeId FROM employee WHERE username = "'+req.session.passport.user+'") and b.fieldId = f.id;', function(err, rows){
+                        if (err) console.log(err);
+                        console.log(rows);
+                        renderHTML('./views/profile.ejs', res, { user: result,field: rows, name: req.session.passport.user, role: req.user[0].role });
+                    })
+
                 });
             }
         } else {
@@ -158,12 +162,43 @@ router.route('/profile')
         }
     })
 
+router.route('/field_research1')
+    .get((req, res) => {
+        connection.query('SELECT * FROM field', function (err, result) {
+            if (err) throw (err)
+            // connection.query('SELECT f.text fieldname FROM employee e, field f, fieldEmploy b WHERE b.employeeId = (select employeeId FROM employee WHERE username = "'+req.session.passport.user+'") and b.fieldId = f.id;', function(err, rows){
+            //     if (err) console.log(err)
+            //     res.render("field_research", { field: result, name: req.session.passport.user, role: req.user[0].role })
+            // })
+            res.send(result);
+        })
+    })
+
+router.route('/field_research1/:id&:sd')
+    .get(function(req, res) {
+        const id = req.params.id;
+        const sd = req.params.sd;
+        connection.query('DELETE FROM fieldEmploy WHERE employeeId = ?' ,sd, (err) => {
+            if(err) console.log(err);
+            connection.query('INSERT INTO fieldEmploy (employeeId, fieldId) VALUE ('+sd+', '+id+')', (err,rows) => {
+            if(err) console.log(err);
+                res.send(rows);
+                //res.render("profile1.ejs", {degree: rows[0].degree, name: rows[0].name, employeeId: rows[0].employeeId, employeeType: rows[0].employeeType});
+            });
+        })
+    })
+
+
+router.route('/profile-manage')
+    .post(employeeController.editProfile)
+// ======================================================
 
 // Employee route
 router.route('/employee')
     .get(function (req, res) {
         if(req.isAuthenticated()) {
             connection.query('SELECT * FROM employee', function (err, result) {
+                if (err) throw err;
                 renderHTML('./views/employee.ejs', res, { employee: result, name: req.session.passport.user, role: req.user[0].role });
             });
         } else {
