@@ -22,117 +22,14 @@
                         <div id="field-list-name" style="display: inline-block">
                             <h3 style="margin: 0;">Lĩnh vực</h3>
                         </div>
-                        <button type="button" class="btn btn-primary">Thêm</button>
-                    </div>
-                    <div id="jstree_demo_div">
-                        <ul>
-                        <% var findChild = function(field, parent) { %>
-                            <% if(field[parent].hasChild == 1) { %>
-                            <ul>
-                                <% for (var j = parent; j < field.length; j++) { %>
-                                    <% if(field[j].parent_id == field[parent].id) { %>
-                                        <li><%= field[j].name %>
-                                        <% findChild(field, j); %>
-                                        </li>
-                                    <% } %>
-                                <% } %>
-                            </ul>
-                            <% } %>
-                        <% } %>
-                        <% for (var i = 0; i < field.length; i++) { %>
-                            <% if (field[i].parent_id == 0) { %>
-                                <li id="root-<%= field[i].id %>"><%= field[i].name %>
-                                <% findChild(field, i); %>
-                                </li>
-                            <% } %>
-                        <% } %>
-                        </ul>
-                        <!--
-                            <li>Root node 1
-                            <ul>
-                                <li id="child_node_1">Child node 1</li>
-                                <li>Child node 2</li>
-                            </ul>
-                            </li>
-                            <li>Root node 2</li>
-                        </ul>
+                        <div style="display: inline-block;">
+                            <button class="btn btn-info" id="create-root">Thêm</button>
                         </div>
-                        <button>demo button</button>
-                        -->
+                        <input type="text" placeholder="Tìm kiếm" id="field-search" name="search">
                     </div>
-                    <!-- <ul class="tree">
-                        <li class="has-children">
-                            <img src="/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                            <a href="">ACM Computing Classification System</a>
-                            <ul>
-                                <li class="has-children">
-                                    <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                    <a href="">General and refernce</a>
-                                </li>
-                                <li class="has-children">
-                                    <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                    <a href="">Hardware</a>
-                                </li>
-                                <li class="has-children">
-                                    <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                    <a href="">Computer systems organization</a>
-                                </li>
-                                <li class="has-children">
-                                    <img src="/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                    <a href="">Networks</a>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-primary">Thêm</button>
-                                        <button type="button" class="btn btn-primary">Sửa</button>
-                                        <button type="button" class="btn btn-primary">Xóa</button>
-                                    </div>
-                                    <ul>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                            <a href="">Network architectures</a>
-                                        </li>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                            <a href="">Network protocols</a>
-                                        </li>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif"/>
-                                            <a href="">Network components</a>
-                                        </li>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif"/>
-                                            <a href="">Network algorithms</a>
-                                        </li>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif"/>
-                                            <a href="">Network performance evaluation</a>
-                                        </li>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif"/>
-                                            <a href="">Network properties</a>
-                                        </li>
-                                        <li class="has-children">
-                                            <img src="/image/plus.gif"/>
-                                            <a href="">Network services</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="has-children">
-                                    <img src="/image/minus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                    <a href="">Software and its engineering</a>
-                                    <ul>
-                                            <li class="has-children">
-                                                <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                                <a href="">Test1</a>
-                                            </li>
-                                            <li class="has-children">
-                                                <img src="/image/plus.gif" onclick="javascript:Folder_Toggle(this);"/>
-                                                <a href="">Test2</a>
-                                            </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul> -->
+                    <br>
+                    <div id="jstree"></div>
+                    <br>
                 </div>
             </div>
         </div>
@@ -141,29 +38,10 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         <% include partials/foot.ejs %>
         <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
         <script type="text/javascript" src="/dist/jstree.min.js"></script>
-        <script>
-            $(function () { 
-                $('#jstree_demo_div').jstree(); 
-
-                $('#jstree_demo_div').on("changed.jstree", function (e, data) {
-                    console.log(data.selected);
-                });
-
-                $('button').on('click', function () {
-                    $('#jstree_demo_div').jstree(true).select_node('child_node_1');
-                    $('#jstree_demo_div').jstree('select_node', 'child_node_1');
-                    $.jstree.reference('#jstree_demo_div').select_node('child_node_1');
-                });
-            });
-        </script>
+        <script type="text/javascript" src="/js/tree.js"></script>
+        <!--<script type="text/javascript" src="/js/tree.js"></script>-->
     </body>
 </html>

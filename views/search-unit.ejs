@@ -4,12 +4,10 @@
 <head>
   <title>Lĩnh vực nghiên cứu</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%# <meta name="viewport" content="width=device-width, initial-scale=1"> %>
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/dist/themes/default/style.min.css" />
 </head>
 
 <body>
@@ -22,7 +20,6 @@
       </div>
       <br>
       <br>
-
       <ul class="tab" style="display: inline-block" style="margin: 0;">
         <li>
           <a href="#menu1">Đơn vị công tác</a>
@@ -33,24 +30,19 @@
       </ul>
       <br>
       <br>
-
       <div class="tab-content">
-
-
         <div id="menu1" class="tab-item">
           <div class="list">
-            <div id="field-list1">
-              <ul class="hoho">
-                <li>
-                  <a href='#' class="allId">Tất cả</a>
-                </li>
-                <% for(var i=0; i < unit.length; i++) { %>
-                <li>
-                  <a href='#' id="<%= unit[i].company %>" class='someId'><%= unit[i].company %></a>
-                </li>
-                <% }; %>
-              </ul>
-            </div>
+            <ul class="hoho">
+              <li>
+                <a href='#' class="allId">Tất cả</a>
+              </li>
+              <% for(var i=0; i < unit.length; i++) { %>
+              <li>
+                <a href='#' id="<%= unit[i].company %>" class='someId'><%= unit[i].company %></a>
+              </li>
+              <% }; %>
+            </ul>
           </div>
           <table id="table-unit" class="table table-bordered">
             <thead>
@@ -82,18 +74,7 @@
 
         <div id="menu2" class="tab-item">
           <div class="list">
-            <div id="field-list1">
-              <ul class="hoho">
-                <li>
-                  <a href='#' class="allId">Tất cả</a>
-                </li>
-                <% for(var i=0; i < unit.length; i++) { %>
-                <li>
-                  <a href='#' id="<%= unit[i].degree %>" class='someId'><%= unit[i].degree %></a>
-                </li>
-                <% }; %>
-              </ul>
-            </div>
+            <div id="jstree"></div>
           </div>
           <table id="table-unit" class="table table-bordered">
             <thead>
@@ -174,8 +155,9 @@
   <%include partials/foot.ejs%>
   <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/js/myjs.js"></script>
-  <!-- <script type="text/javascript" src="/js/search-func.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/dist/jstree.min.js"></script>
+  <script type="text/javascript" src="/js/tree.js"></script>
 </body>
 
 </html>

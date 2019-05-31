@@ -54,21 +54,59 @@ router.route('/index')
         }
     })
 
+// ============== FIELD PAGE ================
 router.route('/field_research')
     .get((req, res) => {
-        if (req.isAuthenticated()) {
-            if (req.user[0].role === "admin") {
-                connection.query('SELECT * FROM field ORDER BY parent_id', function (err, result) {
-                    res.render("field_research", { field: result, name: req.session.passport.user, role: req.user[0].role })
-                })
-            } else {
-                res.redirect('/')
-            } 
+        if (req.isAuthenticated() && req.user[0].role === "admin") {
+            res.render("field_research", { name: req.session.passport.user, role: req.user[0].role })
         } else {
             res.redirect('/')
         }
     })
 
+router.route('/field')
+    .get((req, res) => {
+        if (req.isAuthenticated() && req.user[0].role === "admin") {
+            connection.query("SELECT * FROM field", function(err, result) {
+                if(err) throw err;
+                res.send(result)
+            });
+        };
+    });
+
+router.route('/researchCreate') 
+    .post((req, res) => {
+        if (req.isAuthenticated() && req.user[0].role === "admin") {
+            var sql = "INSERT INTO field (id, parent, text) VALUES(?, ?, ?);";
+            connection.query(sql, [req.body.id, req.body.parent, req.body.text], (err) => {
+                if (err) console.log(err);
+            });
+        }
+    })
+
+
+router.route('/researchRename') 
+    .post((req, res) => {
+        if (req.isAuthenticated() && req.user[0].role === "admin") {
+            var sql = "UPDATE field SET text = ? WHERE id = ?;";
+            connection.query(sql, [req.body.text,  req.body.id], (err) => {
+                if (err) throw err;
+            });
+        }
+    })
+
+router.route('/researchDelete') 
+    .post((req, res) => {
+        if (req.isAuthenticated() && req.user[0].role === "admin") {
+            var id = req.body.id;
+            var sql = "DELETE FROM field WHERE id = "+id+" OR parent = '"+id+"';";
+            connection.query(sql, (err) => {
+                if (err) console.log(err);
+            })
+        }
+    })
+    
+//==============================================
 
 // Render with DB
 function renderHTML(path, res, data) {
