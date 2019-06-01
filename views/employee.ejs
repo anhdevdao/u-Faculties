@@ -9,7 +9,7 @@
     <body>
         <div id="surface">
             <% include partials/head.ejs %>
-            <div class="container">
+            <div class="container" style="min-height: 525px;">
                 <br>
                 <div>
                     <span style="display: inline-block;">
@@ -85,17 +85,16 @@
                         <label for="employee-list" class="label">Loại Cán Bộ </label>
                         <select value="employee-list" id="type-select">
                             <option value=" ">Tất cả</option>
-                            <option>Giảng viên</option>
+                            <option value="Giảng viên">Giảng viên</option>
                         </select>
                     </div>
                     <div class="employee-option" id="degree-select">
                         <label for="degree-list" class="label">Học hàm, học vị </label>
                         <select value="degree-list" id="deg-select">
                             <option value=" ">Tất cả</option>
-                            <option>GS</option>
-                            <option>ThS</option>
-                            <option>TS</option>
-                            <option>PGS. TS</option>
+                            <% for (var i = 0; i < employee.length; i++) { %>
+                            <option class='someId'><%= employee[i].degree %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="employee-option" id="unit-select">

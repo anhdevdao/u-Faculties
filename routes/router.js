@@ -174,19 +174,37 @@ router.route('/field_research1')
         })
     })
 
+router.route('/field_researchDel/:sd')
+    .get(function(req, res) {
+        const sd = req.params.sd;
+        connection.query('DELETE FROM fieldEmploy WHERE employeeId = ?' ,sd, (err) => {
+            if(err) console.log(err);
+        })
+    })
+
 router.route('/field_research1/:id&:sd')
     .get(function(req, res) {
         const id = req.params.id;
         const sd = req.params.sd;
-        connection.query('DELETE FROM fieldEmploy WHERE employeeId = ?' ,sd, (err) => {
-            if(err) console.log(err);
-            connection.query('INSERT INTO fieldEmploy (employeeId, fieldId) VALUE ('+sd+', '+id+')', (err,rows) => {
+        connection.query('INSERT INTO fieldEmploy (employeeId, fieldId) VALUE ('+sd+', '+id+')', (err,rows) => {
             if(err) console.log(err);
                 res.send(rows);
                 //res.render("profile1.ejs", {degree: rows[0].degree, name: rows[0].name, employeeId: rows[0].employeeId, employeeType: rows[0].employeeType});
-            });
-        })
+        });
     })
+// router.route('/field_research1/:id&:sd')
+//     .get(function(req, res) {
+//         const id = req.params.id;
+//         const sd = req.params.sd;
+//         connection.query('DELETE FROM fieldEmploy WHERE employeeId = ?' ,sd, (err) => {
+//             if(err) console.log(err);
+//             connection.query('INSERT INTO fieldEmploy (employeeId, fieldId) VALUE ('+sd+', '+id+')', (err,rows) => {
+//             if(err) console.log(err);
+//                 res.send(rows);
+//                 //res.render("profile1.ejs", {degree: rows[0].degree, name: rows[0].name, employeeId: rows[0].employeeId, employeeType: rows[0].employeeType});
+//             });
+//         })
+//     })
 
 
 router.route('/profile-manage')

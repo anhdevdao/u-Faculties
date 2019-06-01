@@ -38,9 +38,11 @@
                 <a href='#' class="allId">Tất cả</a>
               </li>
               <% for(var i=0; i < unit.length; i++) { %>
+                <% if (unit[i].company != "") { %> 
               <li>
                 <a href='#' id="<%= unit[i].company %>" class='someId'><%= unit[i].company %></a>
               </li>
+                <% } else {} %> 
               <% }; %>
             </ul>
           </div>

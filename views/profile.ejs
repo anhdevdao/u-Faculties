@@ -102,7 +102,7 @@
                         <span style="display: inline-block">
                             <h2 style="margin: 0;">Lĩnh vực quan tâm</h2>
                         </span>
-                        <button onclick="document.getElementById('modal-wrapper').style.display='block'" id="tree-load <%= user[0].employeeId %>"  class="btn btn-primary create-object">Thêm mới</button>
+                        <button onclick="document.getElementById('modal-wrapper').style.display='block'" id="<%= user[0].employeeId %>"  class="btn btn-primary create-object">Thêm mới</button>
                         
                     </div>
                     <br>
@@ -123,7 +123,7 @@
                 <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close"
                 title="Close PopUp">&times;</span>
                 <br>
-                <h1 style="text-align:center">Chỉnh sửa Lĩnh vực quan tâm</h1>
+                <h2 style="text-align:center">Chỉnh sửa Lĩnh vực quan tâm</h2>
                 <br>
             </div>
             <div class="sub-container" id="information-list">
@@ -140,7 +140,7 @@
         <script type="text/javascript" src="/js/myjs.js"></script>
         <script type="text/javascript" src="/js/profile-manage.js"></script>
         <script type="text/javascript">
-            $("#tree-load").click(function () {
+            $(".btn").click(function () {
                 console.log("ahhihihi")
                 const requestURL = 'field_research1';
                 console.log("making ajax request to: ", requestURL);
@@ -172,6 +172,18 @@
     
             $('#jstree_demo_div').on("changed.jstree", function (e, data) {
                 var i, j, r = [];
+
+                reqURL = 'field_researchDel/'+<%= user[0].employeeId %>;
+                console.log(reqURL)
+                $.ajax({
+                    url: reqURL,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: (data) => {
+                        console.log(data);
+                    }
+                })
+
                 for (i = 0, j = data.selected.length; i < j; i++) {
                     const u = data.selected[i]
                     const requestURL = 'field_research1/' + u + '&' + <%= user[0].employeeId %>;
@@ -181,7 +193,7 @@
                         type: 'GET',
                         datatype: 'json',
                         success: (data) => {
-                        console.log(data);
+                            console.log(data);
                         }
                     })
                 }

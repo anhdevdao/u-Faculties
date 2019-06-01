@@ -81,11 +81,11 @@ table#login tbody tr th {
 }
 label[for="username-input"] {
     margin: 0;
-    color:#fff;
+    color:#EAEBEE;
 }
 label[for="password-input"] {
     margin: 0;
-    color:#fff; 
+    color:#EAEBEE; 
 }
 #forgot-password {
     display: block;
@@ -93,12 +93,19 @@ label[for="password-input"] {
 #login-btn {
     padding: 0 3px;
 }
+#banner {
+    background-color: #EAEBEE;
+}
+#banner:hover {
+    opacity: 0.8;
+}
 #slogan {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     text-align: center;
     font-weight: 800;
     font-size: 50px;
     color: rgb(0, 134, 0);
+    opacity: 1;
 }
 span.select {
     display: inline-block;
@@ -286,4 +293,6 @@ thead tr {
     border: 2px solid gray;
     padding: 5px 10px;
 }
-  
+ul[class="hoho"] li:hover {
+    background-color: #EAEBEE;
+}
