@@ -137,7 +137,7 @@ router.route('/controllers/units-controller')
 
 router.route('/unit-manage')
     .delete(unitController.delUnit)
-    .post(unitController.editUnit)
+    .post(unitController.editUnit);
 
 
 // ================ Profile page route =================
