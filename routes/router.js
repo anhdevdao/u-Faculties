@@ -16,7 +16,7 @@ require('../config/passport')(passport)
 
 // User account route
 router.route('/signin')
-    .post(authenticateController.userLogin)
+    .post(authenticateController.userLogin);
 
 router.route('/controllers/register-controller')
     .post(registerController.register);
